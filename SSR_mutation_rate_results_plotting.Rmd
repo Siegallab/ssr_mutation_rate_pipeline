@@ -1,0 +1,977 @@
+---
+title: "FreeBayes-based sequencing analysis draft"
+author: "Eugene Plavskin"
+date: "8/23/2022"
+output:
+  html_notebook:
+    code_folding: hide
+    fig_caption: yes
+    depth: 3
+    tidy: yes
+    toc: yes
+---
+
+```{r, echo = F, message = F}
+library(tidyverse)
+library(conflicted)
+library(cowplot)
+library(MASS)
+library(seqinr)
+library(magick)
+################################################################################
+################################################################################
+conflict_prefer("rename", "dplyr")
+conflict_prefer("select", "dplyr")
+conflict_prefer("filter", "dplyr")
+################################################################################
+################################################################################
+
+logit_to_prob <- function(logit){
+  odds = exp(logit)
+  prob = odds/(1+odds)
+  return(prob)
+}
+
+################################################################################
+# enter the location of pipeline output folders
+main_folder <- file.path('ssr_mutation_rate_pipeline')
+
+msi_result_file <-
+  file.path(main_folder, 'msh3_analysis','msisensor_calls','msi_out_somatic_comb.tsv')
+msi_ssr_file <-
+  file.path(main_folder, 'msh3_analysis','msisensor_calls','filt_msi_ssr_file.bed')
+msi_genotyped_file <-
+  file.path(main_folder, 'msh3_analysis','msisensor_calls','msi_out_germline_comb.tsv')
+fig_folder <- file.path(main_folder,'figures')
+plavskin_datafile <-
+  file.path(main_folder, 'msh3_analysis','final_calls','fb_analyzed.Rdata')
+plavskin_coverage_path <-
+  file.path(main_folder,'msh3_analysis','aligned_out_full')
+plavsk_strain_info_file <-
+  file.path(main_folder, 'strain_seq_info_files', 'strain_info.csv')
+gene_body_file <- file.path(
+  main_folder, 'strain_seq_info_files', 'ssr_bed_gene_info_260422.tsv'
+  )
+################################################################################
+
+source(file.path(main_folder, 'mut_pipeline_r_scripts', 'supp_calling_functions.R'))
+
+#genome_file <- file.path(main_folder,'ref_genomes','MAparental_S288Cmodified_roman_chrom_names.fasta')
+
+#yeast_genome <- read.fasta(genome_file)
+################################################################################
+min_fold_seq <- 10
+non_motif_GL_cutoff <- 20
+min_ssr_locus_per_category <- 26
+
+################################################################################
+# set up plotting format
+color_theme <- c('homopolymer' = '#6D83B8',
+                    'dinucleotide' = '#8EA1CA',
+                    'trinucleotide' = '#D1D562',
+                    'tetranucleotide' = '#67923F')
+
+plot_theme_pdf <- list(
+  theme_linedraw(),
+  theme(plot.title=element_text(size=11.5,face='bold'),
+        panel.background=element_rect(fill='white'),
+        panel.grid.major=element_line(color='grey',size=0.3),
+        axis.line = element_line(color="black", size = 0.5),
+        legend.title=element_text(size = 9),
+        legend.justification=c(0,1),
+        legend.text=element_text(size=8),
+        axis.text.x=element_text(size=9),
+        axis.text.y=element_text(size=9),
+        axis.title.x=element_text(size=10),
+        axis.title.y=element_text(size=10,angle=90))
+  )
+```
+
+```{r}
+# load plavskin data and rename
+load(plavskin_datafile)
+plavsk_call_df <- call_df
+plavsk_rel_call_df <- rel_call_df
+plavsk_non_motif_muts <- non_motif_muts
+plavsk_GL_diff_thresh_df_slide_unfilt <- GL_diff_thresh_df_slide_unfilt
+plavsk_quant_thresh_genotypes_slide_cat <- quant_thresh_genotypes_slide_cat
+plavsk_quant_thresh_locus_counts <- quant_thresh_locus_counts
+
+plavsk_ssr_bed_df_with_key <- ssr_bed_df_with_key
+plavsk_yeast_genome <- yeast_genome
+plavsk_excluded_regions_df <- excluded_regions_df
+
+rm(call_df, rel_call_df, non_motif_muts, GL_diff_thresh_df_slide_unfilt,
+  quant_thresh_genotypes_slide_cat, quant_thresh_locus_counts,
+  ssr_bed_df_with_key, yeast_genome, ori_GL_ssr_mut_calls, excluded_regions_df)
+```
+
+```{r}
+# clean up GL difference quantile tables to remove rare loci
+plavsk_quant_thresh_genotypes_slide_cat_clean <-
+  plavsk_quant_thresh_genotypes_slide_cat %>%
+  filter(ssr_loci >= min_ssr_locus_per_category)
+plavsk_GL_diff_thresh_df_slide_clean <-
+  plavsk_GL_diff_thresh_df_slide_unfilt %>%
+  filter(ssr_locus_pop >= min_ssr_locus_per_category)
+```
+
+```{r, message = F}
+# group loci into superloci and filter
+non_motif_mut_candidate_superlocus_counts <-
+  plavsk_non_motif_muts %>%
+  group_by(superlocus, strain, CHROM) %>%
+  summarize(mutation = any(mutation)) %>%
+  ungroup() %>%
+  group_by(superlocus, CHROM) %>%
+  summarize(num_mut_strain = sum(mutation))
+
+multihit_superloci <- 
+  subset(non_motif_mut_candidate_superlocus_counts, num_mut_strain>1)$superlocus
+
+non_ssr_single_muts_pass_msh3 <-
+  subset(plavsk_non_motif_muts,
+         min_DP >= min_fold_seq &
+           abs(min_GL_diff) >= abs(non_motif_GL_cutoff) &
+           !(superlocus %in% multihit_superloci) &
+           is.na(ssr)
+         ) %>%
+  filter(grepl('^C|^A',strain)) %>%
+  select(c(
+    CHROM, start, end, strain, msh3, superlocus, mutation, GT,min_GL_diff,
+    min_DP,allele, anc_allele,type,anc_strain,anc_GT,ssr, mut_bp_diff
+    ))
+
+# non_ssr_single_muts_pass_msh3_checked not joined with genotypes in this version
+non_ssr_single_muts_pass_msh3_checked <-
+  non_ssr_single_muts_pass_msh3 %>%
+  right_join(non_ssr_single_muts_pass_msh3)
+  
+# some more summary stats for paper
+non_motif_single_muts_pass_by_superlocus <-
+  non_ssr_single_muts_pass_msh3_checked %>%
+  group_by(superlocus,ssr,strain,msh3) %>%
+  summarize(mut_bp_diff = paste(unique(mut_bp_diff),sep = ';'),
+            num_muts = length(superlocus),
+            min_DP = min(min_DP))
+
+```
+
+**Figure S1**
+```{r}
+# Figure S1: low proportion of reads supports allele calls for non-unique SNM mutations
+prop_non_call_reads_plot <-
+  plavsk_non_motif_muts %>%
+  filter(mut_bp_diff==0 & is.na(ssr) & grepl('^C|^A',strain)) %>%
+  distinct(locus, superlocus) %>%
+  mutate(multihit = superlocus %in% multihit_superloci,
+         multihit_label = ifelse(multihit, 'multiple','one')) %>%
+  merge(plavsk_call_df) %>%
+  filter(DP >= min_fold_seq & abs(GL_diff) > abs(non_motif_GL_cutoff) & grepl('^C|^A',strain)) %>%
+  ggplot()+
+  geom_boxplot(aes(x = call_allele_prop, y = multihit_label))+
+  scale_y_discrete('number of strains\nlocus is mutated in')+
+  scale_x_continuous('proportion of reads supporting called allele')+
+  theme_classic()
+print(prop_non_call_reads_plot)
+ggsave(file = file.path(fig_folder, 'Fig_S1.png'),
+       plot = prop_non_call_reads_plot, width = 6.5, height = 2.5)
+```
+# Calculate coverage
+
+```{r,message = F}
+# calculate coverage
+# coverage files only include coverage BELOW 10x (to conserve space)
+low_coverage_df <- data.frame()
+plavsk_strain_df <-
+  read_csv(plavsk_strain_info_file)
+plavsk_strain_anc_df <-
+  plavsk_strain_df %>%
+  filter(cell_divisions > 0)
+for (curr_strain in unique(plavsk_strain_df$strain)){
+  curr_bedfile <- file.path(plavskin_coverage_path, paste0(curr_strain, '_coverage.bed'))
+  curr_strain_df <- read_tsv(curr_bedfile, col_names = F)
+  colnames(curr_strain_df) <- c('CHROM','start','end','DP')
+  # the bed files are 0-indexed, need to fix that to match the tel/cen/LTR df
+  # also the 'end' seems to maybe really be end+1? (fix that as well)
+  low_coverage_df <-
+    curr_strain_df %>%
+    mutate(
+      start = start+1,
+      end = end,
+      strain = curr_strain,
+      width = end-start+1
+      ) %>%
+    bind_rows(low_coverage_df)
+}
+```
+
+```{r, message = F}
+# set up matrices of low coverage/repeat regions for every chromosome
+
+get_pos_mat_list <- function(template_df, genome_obj, expansion_bp = 0){
+  pos_mat_list <- list()
+  for (curr_chrom in unique(template_df$CHROM)){
+    curr_chrom_length <- length(genome_obj[[curr_chrom]])
+    curr_df <- subset(template_df, CHROM == curr_chrom) %>%
+      mutate(
+        start = pmax(1,start-expansion_bp),
+        end = pmin(curr_chrom_length,end+expansion_bp)
+      )
+    curr_pos_df <- create_pos_mat(curr_df, curr_chrom_length)
+    curr_pos_df_flat <- (rep(1, nrow(curr_df)) %*% curr_pos_df) > 0
+    pos_mat_list[[curr_chrom]] <- curr_pos_df_flat
+  }
+  return(pos_mat_list)
+}
+
+yeast_genome_length <- sum(unlist(lapply(plavsk_yeast_genome, length)))
+
+tel_cen_ltr_mat_list <-
+  get_pos_mat_list(plavsk_excluded_regions_df, plavsk_yeast_genome, expansion_bp = 100)
+ssr_mat_list <-
+  get_pos_mat_list(
+    rename(plavsk_ssr_bed_df_with_key, start = SSR_start, end = SSR_end),
+    plavsk_yeast_genome,
+    expansion_bp = 0
+    )
+```
+
+
+```{r}
+# loop through strains, creating pos mat lists for each one (starting with ancestors)
+# then, on each chromosome, count union of anc + MA low coverage,
+# as well as anc + MA low coverage + tel_cen_ltr
+# summarize by strain and calculate percentages
+anc_strain_missingness_mat_list <- list()
+for (curr_strain in unique(plavsk_strain_anc_df$anc_strain)){
+  curr_strain_df <- subset(low_coverage_df, strain == curr_strain)
+  anc_strain_missingness_mat_list[[curr_strain]] <-
+    get_pos_mat_list(curr_strain_df, plavsk_yeast_genome)
+}
+
+missingness_by_chrom <- data.frame()
+for (curr_strain in unique(plavsk_strain_anc_df$strain)){
+  curr_anc = subset(plavsk_strain_anc_df, strain == curr_strain)$anc_strain[1]
+  curr_strain_df <- subset(low_coverage_df, strain == curr_strain)
+  curr_pos_mat_list <- get_pos_mat_list(curr_strain_df, plavsk_yeast_genome)
+  curr_anc_pos_mat_list <- anc_strain_missingness_mat_list[[curr_anc]]
+  for (curr_chrom in unique(curr_strain_df$CHROM)){
+    joint_low_cov_mat <-
+      curr_pos_mat_list[[curr_chrom]] | curr_anc_pos_mat_list[[curr_chrom]]
+    curr_excluded_mat <- tel_cen_ltr_mat_list[[curr_chrom]]
+    if (is.null(curr_excluded_mat)){
+      curr_excluded_mat <- rep(0, length(joint_low_cov_mat))
+    }
+    curr_ssr_mat <- ssr_mat_list[[curr_chrom]]
+    if (is.null(curr_ssr_mat)){
+      curr_ssr_mat <- rep(0, length(joint_low_cov_mat))
+    }
+    joint_missing_mat <- joint_low_cov_mat | curr_excluded_mat
+    joint_missing_mat_ssr <- joint_missing_mat | curr_ssr_mat
+    missingness_by_chrom <- 
+      missingness_by_chrom %>%
+      bind_rows(data.frame(
+        strain = curr_strain,
+        CHROM = curr_chrom,
+        low_coverage_bp = sum(joint_low_cov_mat),
+        tot_missing_bp = sum(joint_missing_mat),
+        tot_missing_with_ssr_bp = sum(joint_missing_mat_ssr)
+      ))
+  }
+}
+
+low_coverage_by_strain <-
+  low_coverage_df %>%
+  group_by(strain) %>%
+  summarize(low_coverage_stretch = sum(width)) %>%
+  mutate(low_coverage_prop = low_coverage_stretch/yeast_genome_length)
+missingness_by_strain <-
+  missingness_by_chrom %>%
+  group_by(strain) %>%
+  summarize(low_coverage_bp = sum(low_coverage_bp),
+            tot_missing_bp = sum(tot_missing_bp),
+            tot_missing_with_ssr_bp = sum(tot_missing_with_ssr_bp)) %>%
+  mutate(low_coverage_prop = low_coverage_bp/yeast_genome_length,
+         tot_missing_prop = tot_missing_bp/yeast_genome_length,
+         tot_missing_with_ssr_prop = tot_missing_with_ssr_bp/yeast_genome_length)
+missingness_by_strain_msh3 <-
+  missingness_by_strain %>%
+  filter(!strain %in% c('026.2A-2C','061.2'))
+```
+
+# Mutation numbers
+
+## non-SSR SNMs
+
+```{r}
+# Calculate per-bp mutation rate
+non_ssr_SNM_by_strain <-
+  non_ssr_single_muts_pass_msh3 %>%
+  filter(mut_bp_diff==0) %>%
+  group_by(strain, msh3) %>%
+  summarize(mut_num = length(unique(superlocus))) %>%
+  full_join(missingness_by_strain_msh3) %>%
+  replace_na(list(mut_num = 0)) %>%
+  mutate(genotyped_bp = yeast_genome_length - tot_missing_with_ssr_bp,
+         mut_rate = mut_num/genotyped_bp,
+         msh3 = grepl('^C',strain))
+
+SNM_mut_rate_model <-
+  glm(
+    cbind(mut_num, (genotyped_bp-mut_num)) ~ 1 + msh3,
+    family = "binomial",
+    data = subset(non_ssr_SNM_by_strain, grepl('^C|^A', strain))
+  )
+SNM_mut_rate_model_simple <-
+  glm(
+    cbind(mut_num, (genotyped_bp-mut_num)) ~ 1,
+    family = "binomial",
+    data = subset(non_ssr_SNM_by_strain, grepl('^C|^A', strain))
+  )
+
+SNM_mut_rate_model_simple_prob_confint <-
+  logit_to_prob(confint(SNM_mut_rate_model_simple))
+```
+Of the non-SSR loci with single-nucleotide substitutions, `r nrow(subset(non_motif_single_muts_pass_by_superlocus,mut_bp_diff == 0 & msh3))` were in a single msh3+ strain, and the rest were found among `r length(unique(subset(non_motif_single_muts_pass_by_superlocus,mut_bp_diff == 0 & !msh3)$strain))` of the 34 sequenced msh3- strains. To compute the non-SSR SNM mutation rate across strains, we calculated the number of mutations found in the proportion of the genome sequenced at `r min_fold_seq`x or higher. We found no significant difference between the non-SNM mutation rate in msh3+ and msh3- MA strain (p = `r round(1-pchisq(as.numeric((logLik(SNM_mut_rate_model)-logLik(SNM_mut_rate_model_simple))*2),1),2)`); the non-SSR SNM mutation rate across all strains is `r as.numeric(round(logit_to_prob(coef(SNM_mut_rate_model_simple)[1])*yeast_genome_length,1))` mutations/genome (over the course of ~200 generations), or `r round(as.numeric(logit_to_prob(coef(SNM_mut_rate_model_simple)[1]))/200*(10^10),1)` x 10-10 mutations/bp/generation (95% CI: `r round(as.numeric(SNM_mut_rate_model_simple_prob_confint[1])/200*10^10,1)`-`r round(as.numeric(SNM_mut_rate_model_simple_prob_confint[2])/200*10^10,1)` x 10-10 mutations/bp/generation).
+
+## Indels
+
+```{r}
+non_ssr_indels <-
+  non_ssr_single_muts_pass_msh3 %>%
+  filter(mut_bp_diff != 0) %>%
+  select(CHROM, start, end, strain, allele, anc_allele, mut_bp_diff) %>%
+  rowwise() %>%
+  mutate(
+    seq = toupper(paste(plavsk_yeast_genome[[CHROM]][(start-abs(mut_bp_diff) * 3):(end+abs(mut_bp_diff) * 5)],collapse = ''))
+  )
+write.csv(non_ssr_indels, file.path(fig_folder, 'proto_indel_table.csv'))
+```
+
+## SSR loci filtration
+
+```{r}
+plavsk_window_size = 5
+plavsk_quant_thresh <-  0.35
+
+# Filter SSR mutations calls in plavskin data
+plavsk_call_df_ssr_filt <-
+  plavsk_GL_diff_thresh_df_slide_clean %>%
+  filter(
+    window_size == plavsk_window_size &
+      GL_diff_quant == plavsk_quant_thresh
+    ) %>%
+  inner_join(
+    subset(plavsk_call_df,
+           !is.na(ssr) &
+             !tel_cen_ltr &
+             (grepl('^C|^A',strain) |
+                strain %in% c(plavsk_strain_anc_df$anc_strain)
+             )
+           )
+    ) %>%
+  filter(GL_diff < GL_diff_thresh)
+plavsk_ssr_rel_call_df <-
+  haploid_ma_rel_call_fun(plavsk_call_df_ssr_filt, plavsk_strain_anc_df)
+rm(plavsk_call_df_ssr_filt)
+
+```
+
+# Figure 1: Property-dependent filtering of SSR loci (and Fig S2)
+
+```{r}
+get_GL_diff_median_plot <- function(call_df, color_list = color_theme){
+  GL_diff_median_plot <-
+    call_df %>%
+    filter(!is.na(ssr) & !tel_cen_ltr) %>%
+    group_by(`% A/T`, MOTIF_LEN, MOTIF_NAME, NUM_COPIES) %>%
+    summarize(ssr_pop = length(unique(ssr)),
+              GL_diff_med = median(GL_diff, na.rm = T)) %>%
+    filter(ssr_pop >= min_ssr_locus_per_category) %>%
+    ggplot(
+      aes(x = NUM_COPIES, y = -GL_diff_med, color = MOTIF_NAME, shape = `% A/T`)
+      ) +
+    geom_point()+
+    scale_x_continuous('number of motif copies')+
+    scale_y_continuous('median GL difference')+
+    scale_color_manual(values = color_list,
+                       name = element_blank())+
+    theme_bw()+
+    plot_theme_pdf
+  return(GL_diff_median_plot)
+}
+```
+```{r}
+#Fig1A
+plavsk_GL_diff_median_plot <-
+  get_GL_diff_median_plot(subset(plavsk_call_df, grepl('^C|^A', strain)))
+print(plavsk_GL_diff_median_plot)
+
+```
+```{r}
+get_slide_window_plot <- function(
+  quant_thresh_genotypes_slide_cat_df,
+  gen_num,
+  ploidy,
+  group_cat = NA,
+  y_lims = NA
+  ){
+  if (!(is.na(group_cat))){
+    group_cat_final <- c('GL_diff_quant', 'window_size',group_cat)
+  }else{
+    group_cat_final <- c('GL_diff_quant', 'window_size')
+  }
+  out_plot <-
+    quant_thresh_genotypes_slide_cat_df %>%
+    group_by_at(vars(all_of(group_cat_final))) %>%
+    summarize(total_calls = sum(total_calls),
+              total_muts = sum(total_muts),
+              mut_rate = total_muts/total_calls/gen_num/ploidy) %>%
+    ggplot(mapping = aes(
+      x = GL_diff_quant,
+      y = mut_rate
+    ))+
+    geom_line(aes(linetype = as.factor(window_size)))+
+    scale_x_continuous('subgroup-specific ∆GL thresh quantile')+
+    theme_bw()+
+    theme(legend.position = c(0.6,0.7),
+          legend.direction = 'horizontal')
+  if (is.na(y_lims)){
+    out_plot <-
+      out_plot +
+      scale_y_log10(expression(atop(
+        'mut rate estimate',
+        '(muts/locus/gen/genome)')))
+  }else{
+    out_plot <-
+      out_plot +
+      scale_y_log10(
+        expression(atop(
+        'mut rate estimate',
+        '(muts/locus/gen/genome)')),
+        limits = y_lims
+        )
+  }
+  return(out_plot)
+}
+
+plavsk_slide_thresh_single_window_plot <-
+  get_slide_window_plot(
+    subset(plavsk_quant_thresh_genotypes_slide_cat_clean, window_size == 5 & !is.na(msh3)),
+    200,
+    1,
+    y_lims = c(1*10^-8,1.1*10^-6)
+  ) +
+  geom_vline(aes(xintercept = .35), color = 'red', linetype = 'dashed')+
+  guides(linetype = "none")
+print(plavsk_slide_thresh_single_window_plot)
+```
+```{r}
+# proportion of loci called
+plavsk_slide_thresh_multi_window_plot <-
+  get_slide_window_plot(
+    subset(plavsk_quant_thresh_genotypes_slide_cat_clean, !is.na(msh3)),
+    200,
+    1,
+    y_lims = c(1*10^-8,1.1*10^-6)) +
+  scale_linetype_manual('repeat copy number\nwindow size',
+                          values = c('3' = 'dashed', '5' = 'solid', '7' = 'dotted')
+                          )
+print(plavsk_slide_thresh_multi_window_plot)
+```
+```{r}
+plavsk_loci_nums_by_group_orig <-
+  plavsk_ssr_bed_df_with_key %>%
+  group_by(`% A/T`, MOTIF_NAME, NUM_COPIES, MOTIF_LEN) %>%
+  summarize(
+    orig_pop = sum(!is.na(ssr))*length(unique(plavsk_ssr_rel_call_df$strain))
+    )
+plavsk_loci_nums_by_group_postfilt <-
+  plavsk_ssr_rel_call_df %>%
+  group_by(`% A/T`, MOTIF_NAME, NUM_COPIES, MOTIF_LEN) %>%
+  summarize(postfilt_pop = sum(!is.na(ssr)))
+
+plavsk_loci_nums_by_group <-
+  full_join(
+    plavsk_loci_nums_by_group_orig,
+    plavsk_loci_nums_by_group_postfilt
+    ) %>%
+  replace_na(list(postfilt_pop = 0)) %>%
+  mutate(prop_remain = postfilt_pop/orig_pop)
+
+rm(plavsk_loci_nums_by_group_orig, plavsk_loci_nums_by_group_postfilt)
+
+plavsk_loci_call_plot <-
+  plavsk_loci_nums_by_group %>%
+  filter(MOTIF_LEN <= 4) %>%
+  rowid_to_column('grouping') %>%
+  pivot_longer(
+    cols = c(orig_pop,postfilt_pop),
+    names_to = 'pop_group',
+    values_to = 'pop'
+  ) %>%
+  ggplot(mapping = aes(
+    x = NUM_COPIES,
+    y = pop,
+    color = MOTIF_NAME,
+    fill = MOTIF_NAME,
+    shape = pop_group
+    )) +
+  geom_point()+
+  geom_line(aes(group = grouping)) +
+  scale_y_log10('number of loci')+
+  scale_x_log10('number of motif copies')+
+  scale_shape_manual(values = c(orig_pop = 21, postfilt_pop = 1))+
+  scale_color_manual(values = color_theme)+
+  scale_fill_manual(values = color_theme)+
+  facet_grid(MOTIF_NAME ~ `% A/T`, labeller = labeller(`% A/T` = label_both,
+                                                       MOTIF_NAME = label_value))+
+  theme_bw()+
+  theme(legend.position = 'none')
+print(plavsk_loci_call_plot)
+```
+```{r}
+# write figure S2B
+Fig_S2 <-
+  plot_grid(
+    plavsk_slide_thresh_multi_window_plot,
+    plavsk_loci_call_plot,
+    nrow = 2,
+    rel_heights = c(1,2.25),
+    labels = 'AUTO'
+    )
+
+ggsave(file = file.path(fig_folder, 'Fig_S2.png'),
+       plot = Fig_S2, width = 6.5, height = 8.8)
+```
+
+## comparison with MSI
+```{r message = F}
+msi_ssr_df <-
+  read_tsv(msi_ssr_file) %>%
+  rename(CHROM = chromosome,
+         MOTIF = repeat_unit_bases,
+         MOTIF_LEN = repeat_unit_length,
+         NUM_COPIES = repeat_times) %>%
+  mutate(start = location + 1,
+         end = location + MOTIF_LEN*NUM_COPIES,
+         locus = paste0(CHROM,':',location)) %>%
+  select(locus, CHROM, start, end, MOTIF, MOTIF_LEN, NUM_COPIES)
+
+msi_plavsk_ssr_match_df <-
+  recode_loci_overlap(
+    msi_ssr_df,
+    distinct(rename(
+      plavsk_ssr_bed_df_with_key,
+      c(old_locus = locus,
+        locus = ssr,
+        start = SSR_start,
+        end = SSR_end)
+      )),
+    alt_chrom_key = list('Mito' = 17*10^7),
+    bed_dist_expansion = 1
+  ) %>%
+  rename(msi_locus = pos_locus,
+         ssr = bed_locus)
+
+msi_call_df <-
+  read_tsv(msi_genotyped_file) %>%
+  mutate(msi_locus = paste0(chromosome,':',location),
+         msi_call = T) %>%
+  select(msi_locus, strain, msi_call) %>%
+  full_join(msi_plavsk_ssr_match_df)
+
+msi_data <-
+  read_tsv(msi_result_file) %>%
+  rename(
+    CHROM = chromosome,
+    start = location
+  ) %>%
+  mutate(
+    end = start,
+    locus = paste(CHROM,start,sep=':'),
+    msi_mut = T)
+
+msi_data_exclude <-
+  recode_loci_overlap(
+    distinct(select(msi_data, c(CHROM, start, end, locus))),
+    plavsk_excluded_regions_df,
+    alt_chrom_key = list('Mito' = 17*10^7),
+    bed_dist_expansion = 100
+  )
+
+msi_data_filt <-
+  msi_data %>%
+  filter(!(locus %in% msi_data_exclude$pos_locus),
+         CHROM != 'Mito') %>%
+  select(locus, CHROM, start, end, strain, repeat_times, repeat_unit_bases, difference, P_value, FDR, msi_mut) %>%
+  rename(msi_locus = locus) %>%
+  left_join(distinct(msi_plavsk_ssr_match_df))
+
+plavsk_msi_match <-
+  msi_data_filt %>%
+  select(msi_locus,strain,msi_mut,ssr) %>%
+  full_join(subset(plavsk_ssr_rel_call_df, mutation)) %>%
+  rename(fb_mut = mutation) %>%
+  left_join(msi_call_df) %>%
+  replace_na(list(fb_mut = F, msi_mut = F, msi_call = F))
+
+```
+`r nrow(distinct(subset(plavsk_msi_match,fb_mut & msi_mut), msi_locus, strain))` of `r nrow(distinct(subset(plavsk_msi_match,msi_mut), msi_locus, strain))` mutations identified by msisensor were also called in our analysis. We also identified a further `r nrow(distinct(subset(plavsk_msi_match,fb_mut & !msi_mut), strain, ssr))` mutations not called by msisensor; however, `r nrow(distinct(subset(plavsk_msi_match,fb_mut & !msi_mut & !msi_call), strain, ssr))` of these were at loci which did not pass msisensor's filter for making a call (either as mutant or wildtype).
+
+
+```{r}
+# plot Fig 2
+#MA_fig <- image_read_pdf(file.path(fig_folder, 'MA_fig_v2.pdf'))
+plavsk_GL_diff_median_plot_format <-
+  plavsk_GL_diff_median_plot +
+    theme(legend.position = c(0.425, 0.96),
+          legend.box = "horizontal",
+          legend.text = element_text(size = 6),
+          legend.title = element_text(size = 6.5),
+          legend.spacing.y = unit(-.5,'char'),
+          legend.margin = margin(0,0,0,-.25, unit="cm"))+
+    guides(
+      color = guide_legend(byrow = TRUE),
+      shape = guide_legend(byrow = TRUE))
+Fig_2_top <-
+  plot_grid(plavsk_GL_diff_median_plot_format,
+            plavsk_slide_thresh_single_window_plot+plot_theme_pdf,
+            nrow = 1,
+            labels = c('A','C'))+
+  theme(plot.background = element_rect(fill = "white", color = "white"))
+
+print(Fig_2_top)
+ggsave(file = file.path(fig_folder, 'Fig_2_top.png'),
+       plot = Fig_2_top, width = 6.5, height = 4.35)
+```
+
+# Modeling mutation rate
+
+```{r}
+plavsk_ssr_muts <-
+  plavsk_ssr_rel_call_df %>%
+  filter(mutation) %>%
+  mutate(motif_num_diff = mut_bp_diff/MOTIF_LEN)
+
+plavsk_SSR_mut_by_strain <-
+  plavsk_ssr_rel_call_df %>%
+  group_by(strain, msh3) %>%
+  summarize(mut_num = sum(mutation, na.rm = T),
+            total_loci = sum(!is.na(mutation)),
+            mut_rate = mut_num/total_loci,
+            called_loci_prop = total_loci/nrow(plavsk_ssr_bed_df_with_key))
+```
+
+After filtering mutations as described above (removing `r 100*plavsk_quant_thresh`% of calls with the lowest GL difference values in their categories), we detect mutations in a total of `r length(unique(plavsk_ssr_muts$ssr))` SSR loci (Table S2), with `r min(plavsk_SSR_mut_by_strain$mut_num)`-`r max(plavsk_SSR_mut_by_strain$mut_num)` SSR loci mutated per strain (median mutation number = `r median(plavsk_SSR_mut_by_strain$mut_num)`). The proportion of SSRs that are called also varies significantly among strains, likely due to variable average read depth among strains, with a median of `r round(median(plavsk_SSR_mut_by_strain$called_loci_prop)*100)`% of all SSR loci called.
+
+```{r}
+# write data
+SSR_mut_table <-
+  plavsk_ssr_muts %>%
+  select(
+    CHROM,SSR_start,SSR_end,strain,mut_bp_diff,MOTIF,NUM_COPIES,allele,anc_allele
+    ) %>%
+  rowwise() %>%
+  mutate(
+    seq = toupper(paste(plavsk_yeast_genome[[CHROM]][(SSR_start-3):(SSR_end+3)],
+    collapse = ''
+    ))) %>%
+  ungroup() %>%
+  pivot_longer(cols = c(allele, anc_allele), names_to = 'allele_type',values_to = 'allele_seq')
+
+write_csv(SSR_mut_table,
+          file.path(fig_folder,'SSR_muts.csv'))
+```
+
+## Model SSR mutation rates
+
+```{r}
+full_model <-
+  glm(
+    mutation ~ msh3 + AT_prop + MOTIF_LEN + short_ssr + offset(log(REPEAT_LEN)),
+    family = "binomial",
+    data = plavsk_ssr_rel_call_df
+  )
+
+# probably best model
+best_model <-
+  glm(
+    mutation ~ msh3 + short_ssr + offset(log(REPEAT_LEN)),
+    family = "binomial",
+    data = plavsk_ssr_rel_call_df
+  )
+
+# need to use non-msh3 model for confidence interval; can calculate msh3 significance separately
+full_model_no_msh3 <-
+  update(
+    full_model,
+     . ~ . -msh3,
+    data = subset(plavsk_ssr_rel_call_df, !msh3)
+  )
+best_model_no_msh3 <-
+  update(
+    best_model,
+    . ~ . -msh3,
+    data = subset(plavsk_ssr_rel_call_df, !msh3)
+    )
+best_model_no_msh3_no_short_SSR <-
+  update(
+    best_model_no_msh3,
+    . ~ . -short_ssr,
+  )
+
+p_short_ssr <- 1-pchisq(2*as.numeric(logLik(best_model_no_msh3)-logLik(best_model_no_msh3_no_short_SSR)),1)
+  
+
+best_model_confint <- confint(best_model_no_msh3)
+
+# find model with an msh3 offset such that difference in log likelihood from the
+# best model is ~2.5 (95% CI bound for msh3)
+beta_msh3_bound_candidate <- -.6
+msh3_effect_bound_model <-
+  update(best_model, . ~ . -msh3 + offset(beta_msh3_bound_candidate*msh3))
+#logLik(best_model)-logLik(msh3_effect_bound_model)
+# 2.53
+
+prediction_df <-
+  plavsk_ssr_bed_df_with_key %>%
+  mutate(predict_mut_num = logit_to_prob(predict(best_model_no_msh3, .)))
+predicted_muts_per_strain <- sum(prediction_df$predict_mut_num)
+```
+The overall mutation rate in *msh3-* strains corresponded to ~`r round(predicted_muts_per_strain,1)` mutations/strain. No SSR mutations are found in *msh3+* strains at this threshold. Although we do not have enough data to calculate an estimate for the true mutation rate in wild-type yeast, we can calculate an upper bound on the fold-difference between *msh3+* and *msh3-* mutation rates: there is a `r round(exp(as.numeric(-coef(best_model_no_msh3)['short_ssrTRUE'])))`-fold difference in per-base pair mutation odds between short and long SSRs (95% CI: `r round(exp(-best_model_confint['short_ssrTRUE',"97.5 %"]))`-`r round(exp(-best_model_confint['short_ssrTRUE',"2.5 %"]))`-fold, p = `r p_short_ssr`).
+
+The 95% CI bound for the msh3 mutation effect is a `r round(exp(-beta_msh3_bound_candidate),1)`-fold increase in the odds of mutation in msh3- relative to msh3+.
+
+```{r}
+best_model_no_msh3_motif_len <-
+  update(
+    best_model_no_msh3,
+    . ~ . + MOTIF_LEN,
+  )
+best_model_no_msh3_motif_len_CI <-
+  confint(best_model_no_msh3_motif_len)
+
+best_model_no_msh3_at_prop <-
+  update(
+    best_model_no_msh3,
+    . ~ . + AT_prop,
+  )
+best_model_no_msh3_at_prop_CI <-
+  confint(best_model_no_msh3_at_prop)
+
+p_msh3 <-
+  1-pchisq(
+      2*as.numeric(
+        logLik(best_model)-logLik(update(best_model, . ~ . -msh3))
+        ),1
+      )
+###
+# make df of p-values and effect sizes
+msh3_ssr_eff_df <-
+  data.frame(
+    param = 'msh3_mut',
+    p_val = p_msh3,
+    coef = -coef(best_model)['msh3TRUE'],
+    coef_CI_lower = -beta_msh3_bound_candidate,
+    coef_CI_upper = Inf
+    )
+short_ssr_eff_df <-
+  data.frame(
+    param = 'long_SSR',
+    p_val = p_short_ssr,
+    coef = -coef(best_model_no_msh3)['short_ssrTRUE'],
+    coef_CI_lower = -best_model_confint['short_ssrTRUE',"97.5 %"],
+    coef_CI_upper = -best_model_confint['short_ssrTRUE',"2.5 %"]
+  )
+
+motif_length_eff_df <-
+  data.frame(
+    param = 'motif_length',
+    p_val = 1-pchisq(2*as.numeric(
+      logLik(best_model_no_msh3_motif_len)-logLik(best_model_no_msh3)
+      ),1),
+    coef = coef(best_model_no_msh3_motif_len)['MOTIF_LEN'],
+    coef_CI_lower = best_model_no_msh3_motif_len_CI['MOTIF_LEN', "2.5 %"],
+    coef_CI_upper = best_model_no_msh3_motif_len_CI['MOTIF_LEN', "97.5 %"]
+  )
+
+at_prop_eff_df <-
+  data.frame(
+    param = 'at_prop',
+    p_val = 1-pchisq(2*as.numeric(
+      logLik(best_model_no_msh3_at_prop)-logLik(best_model_no_msh3)
+      ),1),
+    coef = coef(best_model_no_msh3_at_prop)['AT_prop'],
+    coef_CI_lower = best_model_no_msh3_at_prop_CI['AT_prop', "2.5 %"],
+    coef_CI_upper = best_model_no_msh3_at_prop_CI['AT_prop', "97.5 %"]
+  )
+
+combined_eff_df <-
+  bind_rows(
+    msh3_ssr_eff_df, short_ssr_eff_df, motif_length_eff_df, at_prop_eff_df
+    ) %>%
+  remove_rownames() %>%
+  mutate(odds_coef = exp(as.numeric(coef)),
+         odds_CI_lower = exp(as.numeric(coef_CI_lower)),
+         odds_CI_upper = exp(as.numeric(coef_CI_upper))
+         )
+  
+write_csv(combined_eff_df,
+          file.path(fig_folder,'mut_odds_param_table.csv'))
+```
+
+# Insertion-deletion counts
+
+```{r}
+indel_plot <-
+  plavsk_ssr_muts %>%
+  ggplot()+
+  geom_histogram(
+    aes(
+      x = motif_num_diff,
+      fill = MOTIF_NAME
+      ),
+    binwidth = 1,
+    color = 'black') +
+  scale_x_continuous('change in motif number', limits = c(-4,4)) +
+  scale_y_continuous(breaks = seq(0,12,by = 2))+
+  scale_fill_manual(values = color_theme)+
+  facet_grid(rows = vars(MOTIF_NAME)) +
+  theme_bw() + 
+  theme(legend.position = "none") 
+
+indel_summary <-
+  plavsk_ssr_muts %>%
+  mutate(
+    type = ifelse(
+      motif_num_diff==0, 'SSR_SNM', ifelse(motif_num_diff < 0, 'del', 'ins')
+    )
+  ) %>%
+  group_by(MOTIF_NAME) %>%
+  dplyr::count(type) %>%
+  mutate(prop_mut_by_motif_len = n/sum(n),
+         prop_indels = ifelse(type == 'SSR_SNM', NA, n/sum(n[type != 'SSR_SNM'])))
+
+print(indel_plot)
+```
+```{r}
+indel_rate_model <-
+  indel_summary %>%
+  filter(type %in% c('ins','del')) %>%
+  select(MOTIF_NAME, type, n) %>%
+  pivot_wider(names_from = type, values_from = n) %>%
+  glm(
+    cbind(ins, del) ~ 0 + MOTIF_NAME,
+    family = "binomial",
+    data = .
+  )
+
+get_indel_p_val <- function(indel_df, motif_name){
+  p_val <-
+    indel_df %>%
+    filter(type %in% c('ins','del'),
+           MOTIF_NAME==motif_name) %>%
+    pbinom(
+      q = min(
+        subset(.,type=='ins')$n,subset(.,type=='del')$n
+        ),
+      size = sum(.[,'n']),
+      p = 0.5
+      )
+  return(p_val)
+}
+```
+
+the increase in the rate of deletions relative to insertions was only significant among homopolymers (p = `r round(get_indel_p_val(indel_summary, 'homopolymer'),3)`, `r round(get_indel_p_val(indel_summary, 'dinucleotide'),3)`, and `r round(get_indel_p_val(indel_summary, 'trinucleotide'),3)` for homopolymer, dinucleotide, and trinucleotide repeats, respectively).
+
+```{r}
+# plot Fig 3
+Fig_3 <-
+  indel_plot
+
+ggsave(file = file.path(fig_folder, 'Fig_3.png'),
+       plot = Fig_3, width = 3.5, height = 3.5)
+```
+
+There are `r sum(subset(indel_summary, type == 'SSR_SNM')$n)` SNMs within SSRs (`r round(sum(subset(indel_summary, type == 'SSR_SNM')$n)/length(unique(plavsk_ssr_muts$ssr))*100)`% of all SSR-associated mutations). Consistent with Lang *et al*. [Table 3] and [Lujan, Clark, Kunkel 2015](https://doi:10.1093/nar/gkv271), we observe a strong bias towards deletions in homopolymers; however, we also observe a bias towards deletions in dinucleotide repeats and trinucleotide repeats; I don't think this was the case in Lang *et al*. or Lujan *et al*. (the latter didn't observe trinucleotide repeats, see last results section right before discussion).
+
+```{r}
+plavsk_non_ssr_substitution_num_df <-
+  non_ssr_SNM_by_strain %>%
+  filter(grepl('^C|^A', strain)) %>%
+  select(strain, msh3, mut_num, genotyped_bp) %>%
+  mutate(ssr = F)
+
+plavsk_ssr_coverage_by_strain <-
+  plavsk_ssr_rel_call_df %>%
+  group_by(strain,msh3) %>%
+  summarize(genotyped_bp = sum(SSR_end-SSR_start+1))
+
+plavsk_ssr_substitution_num_df <-
+  plavsk_ssr_muts %>%
+  filter(mut_bp_diff == 0) %>%
+  group_by(strain,msh3) %>%
+  summarize(mut_num = sum(mutation)) %>%
+  full_join(plavsk_ssr_coverage_by_strain) %>%
+  replace_na(list(mut_num = 0)) %>%
+  filter(grepl('^C|^A', strain)) %>%
+  mutate(ssr = T)
+
+plavsk_substitution_num_df <-
+  bind_rows(plavsk_ssr_substitution_num_df,
+            plavsk_non_ssr_substitution_num_df)
+
+# msh3 status not significant, so removing that from model
+SSR_sub_mut_model <-
+  glm(
+    cbind(mut_num, (genotyped_bp-mut_num)) ~ 1 + ssr,
+    family = "binomial",
+    data = plavsk_substitution_num_df
+  )
+
+SSR_sub_rate_p_val <-
+  1 - pchisq(2*as.numeric(
+    logLik(SSR_sub_mut_model)-
+      logLik(update(SSR_sub_mut_model, . ~ . -ssr,))
+    ),1)
+
+```
+
+We identified `r sum(subset(indel_summary, type == 'SSR_SNM')$n)` substitutions within filtration-passing SSR regions in msh3∆ MA strains, at an overall rate of ~1 substitution per `r round(1/logit_to_prob(sum(coef(SSR_sub_mut_model)))/200,-4)` bp per generation. This is about `r round(logit_to_prob(sum(coef(SSR_sub_mut_model)))/logit_to_prob(coef(SSR_sub_mut_model)['(Intercept)']),1)`x the non-SSR substitution rate; however, this difference is not statistically significant (p = `r round(SSR_sub_rate_p_val,2)`).
+
+```{r}
+write_csv(non_ssr_SNM_by_strain, file.path(fig_folder, 'non_ssr_SNM_by_strain.csv'))
+write_csv(subset(non_ssr_single_muts_pass_msh3, mut_bp_diff==0),
+          file.path(fig_folder, 'non_ssr_SNM_list.csv'))
+```
+
+# Create supp tables
+```{r}
+Table_S2 <-
+  non_ssr_single_muts_pass_msh3 %>%
+  filter(mut_bp_diff == 0) %>%
+  select(CHROM, start, strain, allele, anc_allele) %>%
+  rename(chromosome = CHROM,
+         `ancestral allele` = anc_allele) %>%
+  arrange(as.roman(chromosome))
+write_csv(Table_S2, file.path(fig_folder,'Table_S2.csv'))
+
+Table_S3 <-
+  missingness_by_strain_msh3 %>%
+  mutate(
+    strain_type = gsub('[0-9]*','',strain),
+    line_num = as.numeric(gsub('[A-z]*','',strain)),
+    `% genome above threshold` = round((1-tot_missing_prop)*100,1),
+    `% genome above threshold, SSRs excluded` =
+      round((1-tot_missing_with_ssr_prop)*100,1)
+    ) %>%
+  arrange(strain_type, line_num) %>%
+  select(c(
+    strain,
+    `% genome above threshold`,
+    `% genome above threshold, SSRs excluded`
+  ))
+write_csv(Table_S3, file.path(fig_folder,'Table_S3.csv')) 
+```
