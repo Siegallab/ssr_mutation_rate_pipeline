@@ -1,0 +1,1058 @@
+QueryORF	QueryGene	ExperimentOutcome	PredictionScore	Literature	FinalCategory
+YAL001C	TFC3		0,48		Core
+YAL003W	EFB1		0,34		Core
+YAL025C	MAK16		0,28		Core
+YAL032C	PRP45	Indispensable	0,27		Core
+YAL033W	POP5	Indispensable	0,25		Core
+YAL034W-A	MTW1	Indispensable	0,32		Core
+YAL038W	CDC19		0,46		Core
+YAL041W	CDC24	Indispensable	0,67		Core
+YAL043C	PTA1	Indispensable	0,22		Core
+YAR007C	RFA1		0,31		Core
+YAR008W	SEN34		0,36		Core
+YBL004W	UTP20		0,33		Core
+YBL018C	POP8		0,25		Core
+YBL020W	RFT1	Indispensable	0,44		Core
+YBL023C	MCM2		0,22		Core
+YBL026W	LSM2	Indispensable	0,35		Core
+YBL035C	POL12	Indispensable	0,26		Core
+YBL041W	PRE7	Indispensable	0,17		Core
+YBL050W	SEC17	Indispensable	0,49		Core
+YBL074C	AAR2	Indispensable	0,48		Core
+YBL076C	ILS1	Indispensable	0,30		Core
+YBL084C	CDC27		0,29		Core
+YBL092W	RPL32	Indispensable	0,42		Core
+YBL097W	BRN1		0,50		Core
+YBR004C	GPI18		0,45		Core
+YBR011C	IPP1	Indispensable	0,45		Core
+YBR029C	CDS1		0,37		Core
+YBR049C	REB1		0,39		Core
+YBR055C	PRP6	Indispensable	0,21		Core
+YBR060C	ORC2		0,39		Core
+YBR079C	RPG1	Indispensable	0,13		Core
+YBR080C	SEC18	Indispensable	0,46		Core
+YBR087W	RFC5	Indispensable	0,23		Core
+YBR088C	POL30		0,29		Core
+YBR091C	TIM12		0,40		Core
+YBR102C	EXO84	Indispensable	0,33		Core
+YBR109C	CMD1	Indispensable	0,34		Core
+YBR110W	ALG1	Indispensable	0,44		Core
+YBR121C	GRS1		0,28		Core
+YBR123C	TFC1	Indispensable	0,38		Core
+YBR135W	CKS1	Indispensable	0,46		Core
+YBR142W	MAK5	Indispensable	0,30		Core
+YBR143C	SUP45		0,25		Core
+YBR153W	RIB7	Indispensable	0,65		Core
+YBR154C	RPB5		0,20		Core
+YBR155W	CNS1	Indispensable	0,59		Core
+YBR160W	CDC28		0,26		Core
+YBR167C	POP7		0,29		Core
+YBR193C	MED8	Indispensable	0,44		Core
+YBR196C	PGI1	Indispensable	0,37		Core
+YBR198C	TAF5	Indispensable	0,37		Core
+YBR202W	MCM7	Indispensable	0,20		Core
+YBR211C	AME1	Indispensable	0,28		Core
+YBR233W-A	DAD3		0,41		Core
+YBR234C	ARC40	Indispensable	0,29		Core
+YBR236C	ABD1	Indispensable	0,34		Core
+YBR237W	PRP5	Indispensable	0,30		Core
+YBR243C	ALG7		0,41		Core
+YBR247C	ENP1	Indispensable	0,23		Core
+YBR253W	SRB6		0,46		Core
+YBR254C	TRS20		0,38		Core
+YBR256C	RIB5	Indispensable	0,50		Core
+YBR257W	POP4	Indispensable	0,24		Core
+YBR265W	TSC10	Indispensable	0,39		Core
+YCL017C	NFS1	Indispensable	0,51		Core
+YCL031C	RRP7	Indispensable	0,43		Core
+YCL043C	PDI1	Indispensable	0,43		Core
+YCL052C	PBN1	Indispensable	0,51		Core
+YCL054W	SPB1	Indispensable	0,11		Core
+YCL059C	KRR1	Indispensable	0,14		Core
+YCR012W	PGK1	Indispensable	0,36		Core
+YCR035C	RRP43	Indispensable	0,22		Core
+YCR052W	RSC6	Indispensable	0,51		Core
+YCR054C	CTR86	Indispensable	0,44		Core
+YCR057C	PWP2	Indispensable	0,18		Core
+YCR072C	RSA4	Indispensable	0,18		Core
+YCR093W	CDC39	Indispensable	0,26		Core
+YDL007W	RPT2	Indispensable	0,16		Core
+YDL008W	APC11	Indispensable	0,27		Core
+YDL014W	NOP1	Indispensable	0,27		Core
+YDL015C	TSC13	Indispensable	0,43		Core
+YDL028C	MPS1	Indispensable	0,64		Core
+YDL029W	ARP2	Indispensable	0,26		Core
+YDL030W	PRP9	Indispensable	0,28		Core
+YDL031W	DBP10	Indispensable	0,21		Core
+YDL043C	PRP11	Indispensable	0,17		Core
+YDL045C	FAD1		0,47		Core
+YDL055C	PSA1	Indispensable	0,38		Core
+YDL060W	TSR1	Indispensable	0,18		Core
+YDL064W	UBC9	Indispensable	0,70		Core
+YDL087C	LUC7		0,32		Core
+YDL097C	RPN6		0,33		Core
+YDL098C	SNU23	Indispensable	0,43		Core
+YDL102W	POL3	Indispensable	0,30		Core
+YDL103C	QRI1	Indispensable	0,56		Core
+YDL108W	KIN28	Indispensable	0,38		Core
+YDL111C	RRP42	Indispensable	0,22		Core
+YDL126C	CDC48	Indispensable	0,24		Core
+YDL132W	CDC53		0,24		Core
+YDL139C	SCM3	Indispensable	0,53		Core
+YDL140C	RPO21	Indispensable	0,21		Core
+YDL141W	BPL1	Indispensable	0,39		Core
+YDL143W	CCT4	Indispensable	0,24		Core
+YDL145C	COP1		0,33		Core
+YDL147W	RPN5	Indispensable	0,30		Core
+YDL148C	NOP14	Indispensable	0,16		Core
+YDL150W	RPC53	Indispensable	0,28		Core
+YDL153C	SAS10	Indispensable	0,21		Core
+YDL164C	CDC9	Indispensable	0,39		Core
+YDL166C	FAP7		0,47		Core
+YDL193W	NUS1	Indispensable	0,54		Core
+YDL195W	SEC31	Indispensable	0,58		Core
+YDL207W	GLE1	Indispensable	0,41		Core
+YDL208W	NHP2		0,36		Core
+YDL209C	CWC2		0,29		Core
+YDR002W	YRB1		0,50		Core
+YDR013W	PSF1	Indispensable	0,30		Core
+YDR016C	DAD1		0,35		Core
+YDR021W	FAL1	Indispensable	0,40		Core
+YDR023W	SES1	Indispensable	0,29		Core
+YDR037W	KRS1	Indispensable	0,19		Core
+YDR041W	RSM10		0,47		Core
+YDR044W	HEM13		0,36		Core
+YDR045C	RPC11	Indispensable	0,31		Core
+YDR054C	CDC34		0,36		Core
+YDR060W	MAK21	Indispensable	0,32		Core
+YDR062W	LCB2	Indispensable	0,45		Core
+YDR064W	RPS13	Indispensable	0,23		Core
+YDR086C	SSS1		0,44		Core
+YDR088C	SLU7	Indispensable	0,25		Core
+YDR091C	RLI1	Indispensable	0,21		Core
+YDR113C	PDS1		0,44		Core
+YDR118W	APC4	Indispensable	0,27		Core
+YDR145W	TAF12	Indispensable	0,38		Core
+YDR164C	SEC1		0,43		Core
+YDR167W	TAF10	Indispensable	0,41		Core
+YDR168W	CDC37	Indispensable	0,48		Core
+YDR172W	SUP35		0,25		Core
+YDR180W	SCC2	Indispensable	0,42		Core
+YDR182W	CDC1	Indispensable	0,59		Core
+YDR188W	CCT6		0,22		Core
+YDR190C	RVB1	Indispensable	0,26		Core
+YDR196C	CAB5	Indispensable	0,40		Core
+YDR201W	SPC19	Indispensable	0,36		Core
+YDR211W	GCD6	Indispensable	0,28		Core
+YDR212W	TCP1	Indispensable	0,23		Core
+YDR224C	HTB1		0,44		Core
+YDR228C	PCF11	Indispensable	0,19		Core
+YDR232W	HEM1	Indispensable	0,63		Core
+YDR235W	PRP42	Indispensable	0,22		Core
+YDR236C	FMN1	Indispensable	0,47		Core
+YDR238C	SEC26		0,26		Core
+YDR246W	TRS23		0,32		Core
+YDR267C	CIA1	Indispensable	0,44		Core
+YDR280W	RRP45		0,18		Core
+YDR288W	NSE3	Indispensable	0,31		Core
+YDR299W	BFR2	Indispensable	0,17		Core
+YDR301W	CFT1	Indispensable	0,23		Core
+YDR302W	GPI11		0,43		Core
+YDR303C	RSC3	Indispensable	0,48		Core
+YDR308C	SRB7	Indispensable	0,36		Core
+YDR311W	TFB1	Indispensable	0,24		Core
+YDR320C-A	DAD4		0,32		Core
+YDR324C	UTP4	Indispensable	0,21		Core
+YDR325W	YCG1		0,44		Core
+YDR328C	SKP1	Indispensable	0,33		Core
+YDR331W	GPI8	Indispensable	0,36		Core
+YDR339C	FCF1	Indispensable	0,20		Core
+YDR341C	YDR341C	Indispensable	0,41		Core
+YDR356W	SPC110		0,43		Core
+YDR361C	BCP1	Indispensable	0,52		Core
+YDR362C	TFC6	Indispensable	0,40		Core
+YDR365C	ESF1	Indispensable	0,24		Core
+YDR367W	KEI1	Indispensable	0,48		Core
+YDR376W	ARH1	Indispensable	0,45		Core
+YDR390C	UBA2	Indispensable	0,60		Core
+YDR394W	RPT3	Indispensable	0,19		Core
+YDR398W	UTP5		0,24		Core
+YDR404C	RPB7	Indispensable	0,28		Core
+YDR407C	TRS120	Indispensable	0,41		Core
+YDR412W	RRP17	Indispensable	0,42		Core
+YDR416W	SYF1	Indispensable	0,18		Core
+YDR429C	TIF35	Indispensable	0,26		Core
+YDR434W	GPI17	Indispensable	0,40		Core
+YDR437W	GPI19	Indispensable	0,64		Core
+YDR449C	UTP6	Indispensable	0,17		Core
+YDR454C	GUK1	Indispensable	0,46		Core
+YDR460W	TFB3	Indispensable	0,25		Core
+YDR464W	SPP41	Indispensable	0,50		Core
+YDR472W	TRS31	Indispensable	0,39		Core
+YDR473C	PRP3	Indispensable	0,29		Core
+YDR478W	SNM1	Indispensable	0,31		Core
+YDR489W	SLD5	Indispensable	0,35		Core
+YDR498C	SEC20	Indispensable	0,56		Core
+YDR527W	RBA50	Indispensable	0,54		Core
+YDR531W	CAB1	Indispensable	0,35		Core
+YEL002C	WBP1	Indispensable	0,26		Core
+YEL020W-A	TIM9		0,42		Core
+YEL026W	SNU13	Indispensable	0,22		Core
+YEL032W	MCM3	Indispensable	0,28		Core
+YEL055C	POL5	Indispensable	0,34		Core
+YEL058W	PCM1	Indispensable	0,37		Core
+YER003C	PMI40		0,29		Core
+YER006W	NUG1	Indispensable	0,33		Core
+YER012W	PRE1	Indispensable	0,33		Core
+YER013W	PRP22	Indispensable	0,26		Core
+YER018C	SPC25	Indispensable	0,43		Core
+YER021W	RPN3	Indispensable	0,26		Core
+YER022W	SRB4		0,37		Core
+YER023W	PRO3		0,43		Core
+YER025W	GCD11	Indispensable	0,38		Core
+YER038C	KRE29		0,50		Core
+YER048W-A	ISD11	Indispensable	0,63		Core
+YER082C	UTP7	Indispensable	0,17		Core
+YER094C	PUP3	Indispensable	0,22		Core
+YER125W	RSP5	Indispensable	0,33		Core
+YER126C	NSA2	Indispensable	0,22		Core
+YER127W	LCP5	Indispensable	0,24		Core
+YER133W	GLC7		0,42		Core
+YER136W	GDI1	Indispensable	0,44		Core
+YER148W	SPT15	Indispensable	0,23		Core
+YER168C	CCA1		0,29		Core
+YER171W	RAD3		0,20		Core
+YER172C	BRR2	Indispensable	0,24		Core
+YFL002C	SPB4	Indispensable	0,38		Core
+YFL005W	SEC4	Indispensable	0,49		Core
+YFL008W	SMC1		0,31		Core
+YFL009W	CDC4	Indispensable	0,43		Core
+YFL017C	GNA1		0,39		Core
+YFL017W-A	SMX2		0,38		Core
+YFL022C	FRS2	Indispensable	0,30		Core
+YFL037W	TUB2		0,25		Core
+YFL039C	ACT1		0,29		Core
+YFL045C	SEC53	Indispensable	0,51		Core
+YFR002W	NIC96	Indispensable	0,54		Core
+YFR003C	YPI1	Indispensable	0,55		Core
+YFR004W	RPN11	Indispensable	0,17		Core
+YFR005C	SAD1		0,37		Core
+YFR031C	SMC2	Indispensable	0,44		Core
+YFR037C	RSC8	Indispensable	0,28		Core
+YFR042W	KEG1	Indispensable	0,60		Core
+YFR050C	PRE4	Indispensable	0,34		Core
+YFR051C	RET2	Indispensable	0,39		Core
+YFR052W	RPN12	Indispensable	0,26		Core
+YGL001C	ERG26		0,31		Core
+YGL008C	PMA1		0,40		Core
+YGL011C	SCL1		0,21		Core
+YGL022W	STT3	Indispensable	0,32		Core
+YGL030W	RPL30	Indispensable	0,31		Core
+YGL040C	HEM2	Indispensable	0,50		Core
+YGL044C	RNA15		0,30		Core
+YGL047W	ALG13	Indispensable	0,52		Core
+YGL048C	RPT6	Indispensable	0,33		Core
+YGL055W	OLE1	Indispensable	0,35		Core
+YGL061C	DUO1	Indispensable	0,39		Core
+YGL065C	ALG2	Indispensable	0,43		Core
+YGL068W	MNP1		0,45		Core
+YGL073W	HSF1	Indispensable	0,62		Core
+YGL091C	NBP35		0,27		Core
+YGL097W	SRM1	Indispensable	0,52		Core
+YGL099W	LSG1	Indispensable	0,22		Core
+YGL103W	RPL28	Indispensable	0,31		Core
+YGL106W	MLC1		0,36		Core
+YGL112C	TAF6	Indispensable	0,35		Core
+YGL113W	SLD3	Indispensable	0,60		Core
+YGL116W	CDC20	Indispensable	0,29		Core
+YGL120C	PRP43	Indispensable	0,17		Core
+YGL122C	NAB2	Indispensable	0,49		Core
+YGL123W	RPS2	Indispensable	0,19		Core
+YGL130W	CEG1		0,22		Core
+YGL137W	SEC27		0,31		Core
+YGL142C	GPI10	Indispensable	0,48		Core
+YGL145W	TIP20		0,44		Core
+YGL155W	CDC43	Indispensable	0,45		Core
+YGL171W	ROK1	Indispensable	0,15		Core
+YGL201C	MCM6	Indispensable	0,23		Core
+YGL207W	SPT16	Indispensable	0,30		Core
+YGL233W	SEC15		0,37		Core
+YGL238W	CSE1	Indispensable	0,52		Core
+YGL245W	GUS1		0,32		Core
+YGL247W	BRR6	Indispensable	0,60		Core
+YGR002C	SWC4		0,32		Core
+YGR005C	TFG2	Indispensable	0,39		Core
+YGR009C	SEC9		0,49		Core
+YGR013W	SNU71	Indispensable	0,24		Core
+YGR024C	THG1	Indispensable	0,31		Core
+YGR029W	ERV1	Indispensable	0,53		Core
+YGR030C	POP6	Indispensable	0,29		Core
+YGR047C	TFC4		0,49		Core
+YGR048W	UFD1	Indispensable	0,42		Core
+YGR060W	ERG25	Indispensable	0,41		Core
+YGR074W	SMD1		0,30		Core
+YGR075C	PRP38	Indispensable	0,31		Core
+YGR082W	TOM20		0,39		Core
+YGR083C	GCD2	Indispensable	0,36		Core
+YGR090W	UTP22	Indispensable	0,36		Core
+YGR091W	PRP31		0,25		Core
+YGR094W	VAS1	Indispensable	0,30		Core
+YGR095C	RRP46	Indispensable	0,23		Core
+YGR099W	TEL2	Indispensable	0,49		Core
+YGR103W	NOP7	Indispensable	0,09		Core
+YGR113W	DAM1	Indispensable	0,45		Core
+YGR116W	SPT6	Indispensable	0,53		Core
+YGR128C	UTP8	Indispensable	0,20		Core
+YGR140W	CBF2	Indispensable	0,45		Core
+YGR145W	ENP2	Indispensable	0,16		Core
+YGR156W	PTI1	Indispensable	0,38		Core
+YGR158C	MTR3	Indispensable	0,26		Core
+YGR175C	ERG1	Indispensable	0,46		Core
+YGR179C	OKP1	Indispensable	0,31		Core
+YGR185C	TYS1	Indispensable	0,31		Core
+YGR186W	TFG1	Indispensable	0,43		Core
+YGR191W	HIP1	Indispensable	0,58		Core
+YGR195W	SKI6	Indispensable	0,27		Core
+YGR211W	ZPR1		0,31		Core
+YGR218W	CRM1	Indispensable	0,42		Core
+YGR245C	SDA1	Indispensable	0,21		Core
+YGR246C	BRF1	Indispensable	0,30		Core
+YGR251W	NOP19	Indispensable	0,30		Core
+YGR253C	PUP2	Indispensable	0,13		Core
+YGR264C	MES1	Indispensable	0,12		Core
+YGR267C	FOL2	Indispensable	0,33		Core
+YGR274C	TAF1		0,42		Core
+YGR277C	CAB4	Indispensable	0,52		Core
+YGR278W	CWC22	Indispensable	0,27		Core
+YHL015W	RPS20		0,24		Core
+YHR005C-A	TIM10		0,43		Core
+YHR019C	DED81	Indispensable	0,20		Core
+YHR020W	YHR020W	Indispensable	0,18		Core
+YHR024C	MAS2	Indispensable	0,41		Core
+YHR027C	RPN1		0,22		Core
+YHR036W	BRL1	Indispensable	0,65		Core
+YHR040W	BCD1		0,46		Core
+YHR062C	RPP1	Indispensable	0,20		Core
+YHR065C	RRP3	Indispensable	0,23		Core
+YHR068W	DYS1	Indispensable	0,21		Core
+YHR069C	RRP4	Indispensable	0,27		Core
+YHR072W	ERG7	Indispensable	0,39		Core
+YHR072W-A	NOP10		0,40		Core
+YHR074W	QNS1	Indispensable	0,37		Core
+YHR083W	SAM35	Indispensable	0,55		Core
+YHR085W	IPI1	Indispensable	0,37		Core
+YHR088W	RPF1		0,25		Core
+YHR099W	TRA1		0,46		Core
+YHR107C	CDC12	Indispensable	0,42		Core
+YHR118C	ORC6	Indispensable	0,39		Core
+YHR122W	CIA2		0,44		Core
+YHR128W	FUR1	Indispensable	0,36		Core
+YHR143W-A	RPC10		0,28		Core
+YHR148W	IMP3	Indispensable	0,26		Core
+YHR165C	PRP8		0,24		Core
+YHR166C	CDC23	Indispensable	0,28		Core
+YHR170W	NMD3	Indispensable	0,08		Core
+YHR172W	SPC97	Indispensable	0,34		Core
+YHR186C	KOG1	Indispensable	0,53		Core
+YHR188C	GPI16		0,36		Core
+YHR190W	ERG9		0,31		Core
+YHR196W	UTP9		0,20		Core
+YHR197W	RIX1		0,21		Core
+YIL003W	CFD1	Indispensable	0,43		Core
+YIL004C	BET1	Indispensable	0,70		Core
+YIL019W	FAF1	Indispensable	0,31		Core
+YIL021W	RPB3	Indispensable	0,16		Core
+YIL022W	TIM44		0,32		Core
+YIL026C	IRR1		0,42		Core
+YIL061C	SNP1		0,26		Core
+YIL062C	ARC15	Indispensable	0,41		Core
+YIL068C	SEC6	Indispensable	0,42		Core
+YIL075C	RPN2	Indispensable	0,25		Core
+YIL078W	THS1	Indispensable	0,21		Core
+YIL083C	CAB2	Indispensable	0,44		Core
+YIL091C	UTP25	Indispensable	0,24		Core
+YIL104C	SHQ1		0,33		Core
+YIL109C	SEC24		0,42		Core
+YIL126W	STH1	Indispensable	0,50		Core
+YIL142W	CCT2	Indispensable	0,19		Core
+YIL143C	SSL2	Indispensable	0,28		Core
+YIL144W	NDC80	Indispensable	0,37		Core
+YIR008C	PRI1	Indispensable	0,35		Core
+YIR010W	DSN1		0,37		Core
+YIR011C	STS1	Indispensable	0,62		Core
+YIR012W	SQT1	Indispensable	0,32		Core
+YIR015W	RPR2	Indispensable	0,38		Core
+YIR022W	SEC11	Indispensable	0,53		Core
+YJL001W	PRE3	Indispensable	0,21		Core
+YJL002C	OST1	Indispensable	0,30		Core
+YJL008C	CCT8		0,26		Core
+YJL011C	RPC17	Indispensable	0,29		Core
+YJL012C	VTC4		0,42		Core
+YJL014W	CCT3	Indispensable	0,22		Core
+YJL026W	RNR2		0,36		Core
+YJL031C	BET4	Indispensable	0,37		Core
+YJL033W	HCA4	Indispensable	0,16		Core
+YJL034W	KAR2	Indispensable	0,33		Core
+YJL035C	TAD2	Indispensable	0,62		Core
+YJL039C	NUP192		0,46		Core
+YJL041W	NSP1	Indispensable	0,54		Core
+YJL050W	MTR4	Indispensable	0,17		Core
+YJL054W	TIM54	Indispensable	0,39		Core
+YJL061W	NUP82	Indispensable	0,57		Core
+YJL069C	UTP18	Indispensable	0,22		Core
+YJL072C	PSF2	Indispensable	0,23		Core
+YJL074C	SMC3	Indispensable	0,36		Core
+YJL081C	ARP4		0,39		Core
+YJL087C	TRL1	Indispensable	0,44		Core
+YJL090C	DPB11	Indispensable	0,54		Core
+YJL091C	GWT1	Indispensable	0,41		Core
+YJL104W	PAM16	Indispensable	0,51		Core
+YJL109C	UTP10		0,17		Core
+YJL111W	CCT7	Indispensable	0,19		Core
+YJL125C	GCD14	Indispensable	0,56		Core
+YJL143W	TIM17	Indispensable	0,36		Core
+YJL167W	ERG20	Indispensable	0,40		Core
+YJL173C	RFA3	Indispensable	0,50		Core
+YJL194W	CDC6		0,41		Core
+YJL203W	PRP21	Indispensable	0,19		Core
+YJR002W	MPP10		0,28		Core
+YJR006W	POL31	Indispensable	0,29		Core
+YJR007W	SUI2	Indispensable	0,20		Core
+YJR013W	GPI14	Indispensable	0,31		Core
+YJR041C	URB2	Indispensable	0,40		Core
+YJR045C	SSC1		0,35		Core
+YJR046W	TAH11	Indispensable	0,68		Core
+YJR057W	CDC8	Indispensable	0,48		Core
+YJR064W	CCT5	Indispensable	0,23		Core
+YJR065C	ARP3	Indispensable	0,27		Core
+YJR067C	YAE1	Indispensable	0,62		Core
+YJR068W	RFC2	Indispensable	0,26		Core
+YJR072C	NPA3		0,44		Core
+YJR093C	FIP1	Indispensable	0,23		Core
+YJR112W	NNF1	Indispensable	0,34		Core
+YJR123W	RPS5		0,11		Core
+YKL004W	AUR1	Indispensable	0,50		Core
+YKL012W	PRP40	Indispensable	0,21		Core
+YKL013C	ARC19		0,32		Core
+YKL014C	URB1		0,31		Core
+YKL019W	RAM2	Indispensable	0,37		Core
+YKL021C	MAK11	Indispensable	0,56		Core
+YKL022C	CDC16	Indispensable	0,19		Core
+YKL024C	URA6		0,49		Core
+YKL028W	TFA1	Indispensable	0,41		Core
+YKL033W	TTI1	Indispensable	0,46		Core
+YKL035W	UGP1	Indispensable	0,41		Core
+YKL042W	SPC42		0,33		Core
+YKL045W	PRI2	Indispensable	0,25		Core
+YKL052C	ASK1	Indispensable	0,39		Core
+YKL058W	TOA2	Indispensable	0,48		Core
+YKL059C	MPE1	Indispensable	0,23		Core
+YKL060C	FBA1	Indispensable	0,50		Core
+YKL078W	DHR2		0,15		Core
+YKL082C	RRP14	Indispensable	0,23		Core
+YKL088W	CAB3	Indispensable	0,39		Core
+YKL095W	YJU2		0,43		Core
+YKL099C	UTP11	Indispensable	0,23		Core
+YKL104C	GFA1	Indispensable	0,45		Core
+YKL108W	SLD2	Indispensable	0,55		Core
+YKL112W	ABF1	Indispensable	0,55		Core
+YKL125W	RRN3	Indispensable	0,55		Core
+YKL138C-A	HSK3		0,47		Core
+YKL144C	RPC25	Indispensable	0,21		Core
+YKL145W	RPT1	Indispensable	0,16		Core
+YKL152C	GPM1	Indispensable	0,55		Core
+YKL165C	MCD4	Indispensable	0,58		Core
+YKL172W	EBP2		0,18		Core
+YKL173W	SNU114	Indispensable	0,20		Core
+YKL182W	FAS1		0,39		Core
+YKL186C	MTR2	Indispensable	0,60		Core
+YKL193C	SDS22		0,40		Core
+YKL195W	MIA40	Indispensable	0,56		Core
+YKL196C	YKT6		0,40		Core
+YKL210W	UBA1	Indispensable	0,44		Core
+YKR002W	PAP1	Indispensable	0,20		Core
+YKR008W	RSC4	Indispensable	0,30		Core
+YKR022C	NTR2	Indispensable	0,35		Core
+YKR025W	RPC37		0,25		Core
+YKR037C	SPC34	Indispensable	0,34		Core
+YKR062W	TFA2	Indispensable	0,43		Core
+YKR063C	LAS1	Indispensable	0,51		Core
+YKR068C	BET3	Indispensable	0,35		Core
+YKR071C	DRE2	Indispensable	0,58		Core
+YKR079C	TRZ1	Indispensable	0,26		Core
+YKR081C	RPF2		0,13		Core
+YKR083C	DAD2	Indispensable	0,34		Core
+YKR086W	PRP16	Indispensable	0,44		Core
+YLL003W	SFI1	Indispensable	0,66		Core
+YLL004W	ORC3		0,39		Core
+YLL008W	DRS1	Indispensable	0,13		Core
+YLL011W	SOF1	Indispensable	0,30		Core
+YLL018C	DPS1	Indispensable	0,45		Core
+YLL031C	GPI13	Indispensable	0,38		Core
+YLL034C	RIX7	Indispensable	0,24		Core
+YLL035W	GRC3		0,38		Core
+YLL036C	PRP19		0,23		Core
+YLL050C	COF1	Indispensable	0,59		Core
+YLR002C	NOC3	Indispensable	0,19		Core
+YLR005W	SSL1	Indispensable	0,52		Core
+YLR008C	PAM18		0,44		Core
+YLR009W	RLP24	Indispensable	0,23		Core
+YLR026C	SED5	Indispensable	0,45		Core
+YLR029C	RPL15A	Indispensable	0,59		Core
+YLR033W	RSC58	Indispensable	0,53		Core
+YLR045C	STU2	Indispensable	0,51		Core
+YLR051C	FCF2	Indispensable	0,31		Core
+YLR060W	FRS1	Indispensable	0,23		Core
+YLR066W	SPC3	Indispensable	0,37		Core
+YLR071C	RGR1	Indispensable	0,33		Core
+YLR075W	RPL10	Indispensable	0,29		Core
+YLR078C	BOS1	Indispensable	0,47		Core
+YLR086W	SMC4	Indispensable	0,40		Core
+YLR088W	GAA1	Indispensable	0,41		Core
+YLR100W	ERG27	Indispensable	0,47		Core
+YLR103C	CDC45		0,33		Core
+YLR105C	SEN2	Indispensable	0,32		Core
+YLR106C	MDN1	Indispensable	0,35		Core
+YLR115W	CFT2	Indispensable	0,15		Core
+YLR116W	MSL5	Indispensable	0,23		Core
+YLR117C	CLF1	Indispensable	0,19		Core
+YLR127C	APC2	Indispensable	0,31		Core
+YLR129W	DIP2	Indispensable	0,18		Core
+YLR132C	USB1		0,47		Core
+YLR145W	RMP1	Indispensable	0,37		Core
+YLR147C	SMD3	Indispensable	0,40		Core
+YLR163C	MAS1	Indispensable	0,38		Core
+YLR166C	SEC10	Indispensable	0,43		Core
+YLR167W	RPS31	Indispensable	0,42		Core
+YLR175W	CBF5	Indispensable	0,10		Core
+YLR195C	NMT1		0,47		Core
+YLR196W	PWP1	Indispensable	0,10		Core
+YLR197W	NOP56	Indispensable	0,12		Core
+YLR212C	TUB4	Indispensable	0,44		Core
+YLR222C	UTP13	Indispensable	0,20		Core
+YLR229C	CDC42	Indispensable	0,55		Core
+YLR243W	YLR243W	Indispensable	0,44		Core
+YLR249W	YEF3	Indispensable	0,41		Core
+YLR259C	HSP60	Indispensable	0,34		Core
+YLR272C	YCS4		0,41		Core
+YLR274W	MCM5		0,17		Core
+YLR275W	SMD2	Indispensable	0,33		Core
+YLR276C	DBP9		0,14		Core
+YLR277C	YSH1	Indispensable	0,17		Core
+YLR291C	GCD7		0,29		Core
+YLR293C	GSP1		0,48		Core
+YLR298C	YHC1	Indispensable	0,32		Core
+YLR314C	CDC3	Indispensable	0,47		Core
+YLR316C	TAD3	Indispensable	0,50		Core
+YLR321C	SFH1		0,31		Core
+YLR323C	CWC24	Indispensable	0,34		Core
+YLR336C	SGD1	Indispensable	0,34		Core
+YLR340W	RPP0		0,28		Core
+YLR347C	KAP95		0,36		Core
+YLR355C	ILV5	Indispensable	0,57		Core
+YLR378C	SEC61		0,32		Core
+YLR383W	SMC6	Indispensable	0,51		Core
+YLR397C	AFG2	Indispensable	0,27		Core
+YLR409C	UTP21	Indispensable	0,15		Core
+YLR424W	SPP382	Indispensable	0,30		Core
+YLR430W	SEN1		0,36		Core
+YLR438C-A	LSM3	Indispensable	0,32		Core
+YLR440C	SEC39		0,43		Core
+YLR457C	NBP1	Indispensable	0,60		Core
+YLR459W	GAB1	Indispensable	0,40		Core
+YML010W	SPT5	Indispensable	0,36		Core
+YML015C	TAF11	Indispensable	0,31		Core
+YML023C	NSE5	Indispensable	0,41		Core
+YML025C	YML6		0,36		Core
+YML031W	NDC1		0,45		Core
+YML046W	PRP39	Indispensable	0,22		Core
+YML049C	RSE1	Indispensable	0,26		Core
+YML065W	ORC1		0,39		Core
+YML069W	POB3	Indispensable	0,43		Core
+YML077W	BET5		0,43		Core
+YML085C	TUB1		0,35		Core
+YML092C	PRE8		0,15		Core
+YML093W	UTP14	Indispensable	0,26		Core
+YML098W	TAF13	Indispensable	0,44		Core
+YML114C	TAF8	Indispensable	0,41		Core
+YML125C	PGA3	Indispensable	0,63		Core
+YML126C	ERG13		0,37		Core
+YML127W	RSC9	Indispensable	0,36		Core
+YML130C	ERO1		0,36		Core
+YMR001C	CDC5		0,48		Core
+YMR005W	TAF4		0,37		Core
+YMR013C	SEC59	Indispensable	0,49		Core
+YMR043W	MCM1		0,41		Core
+YMR049C	ERB1	Indispensable	0,11		Core
+YMR059W	SEN15	Indispensable	0,40		Core
+YMR061W	RNA14		0,21		Core
+YMR076C	PDS5	Indispensable	0,65		Core
+YMR093W	UTP15	Indispensable	0,24		Core
+YMR112C	MED11	Indispensable	0,44		Core
+YMR113W	FOL3	Indispensable	0,57		Core
+YMR117C	SPC24	Indispensable	0,39		Core
+YMR128W	ECM16		0,18		Core
+YMR131C	RRB1	Indispensable	0,18		Core
+YMR146C	TIF34	Indispensable	0,21		Core
+YMR149W	SWP1	Indispensable	0,36		Core
+YMR168C	CEP3	Indispensable	0,56		Core
+YMR203W	TOM40	Indispensable	0,29		Core
+YMR208W	ERG12	Indispensable	0,34		Core
+YMR213W	CEF1	Indispensable	0,25		Core
+YMR220W	ERG8	Indispensable	0,56		Core
+YMR227C	TAF7	Indispensable	0,44		Core
+YMR229C	RRP5	Indispensable	0,10		Core
+YMR235C	RNA1	Indispensable	0,38		Core
+YMR236W	TAF9	Indispensable	0,41		Core
+YMR240C	CUS1	Indispensable	0,18		Core
+YMR260C	TIF11	Indispensable	0,44		Core
+YMR268C	PRP24	Indispensable	0,36		Core
+YMR277W	FCP1	Indispensable	0,48		Core
+YMR281W	GPI12	Indispensable	0,41		Core
+YMR288W	HSH155	Indispensable	0,17		Core
+YMR290C	HAS1	Indispensable	0,08		Core
+YMR301C	ATM1	Indispensable	0,51		Core
+YMR309C	NIP1	Indispensable	0,16		Core
+YMR314W	PRE5	Indispensable	0,20		Core
+YNL002C	RLP7	Indispensable	0,16		Core
+YNL026W	SAM50	Indispensable	0,41		Core
+YNL038W	GPI15	Indispensable	0,47		Core
+YNL039W	BDP1	Indispensable	0,30		Core
+YNL061W	NOP2	Indispensable	0,09		Core
+YNL062C	GCD10		0,41		Core
+YNL075W	IMP4		0,23		Core
+YNL088W	TOP2	Indispensable	0,45		Core
+YNL102W	POL1		0,31		Core
+YNL110C	NOP15	Indispensable	0,28		Core
+YNL112W	DBP2	Indispensable	0,17		Core
+YNL113W	RPC19	Indispensable	0,17		Core
+YNL124W	NAF1	Indispensable	0,33		Core
+YNL126W	SPC98	Indispensable	0,29		Core
+YNL131W	TOM22		0,36		Core
+YNL132W	KRE33	Indispensable	0,30		Core
+YNL138W-A	YSF3		0,44		Core
+YNL149C	PGA2	Indispensable	0,68		Core
+YNL151C	RPC31	Indispensable	0,30		Core
+YNL158W	PGA1		0,47		Core
+YNL162W	RPL42A		0,44		Core
+YNL172W	APC1	Indispensable	0,39		Core
+YNL178W	RPS3	Indispensable	0,15		Core
+YNL182C	IPI3	Indispensable	0,16		Core
+YNL189W	SRP1	Indispensable	0,42		Core
+YNL207W	RIO2	Indispensable	0,36		Core
+YNL216W	RAP1		0,49		Core
+YNL221C	POP1	Indispensable	0,21		Core
+YNL222W	SSU72	Indispensable	0,47		Core
+YNL232W	CSL4	Indispensable	0,44		Core
+YNL240C	NAR1	Indispensable	0,74		Core
+YNL244C	SUI1	Indispensable	0,52		Core
+YNL245C	CWC25	Indispensable	0,37		Core
+YNL247W	CRS1	Indispensable	0,23		Core
+YNL251C	NRD1	Indispensable	0,39		Core
+YNL256W	FOL1	Indispensable	0,48		Core
+YNL260C	YNL260C	Indispensable	0,72		Core
+YNL261W	ORC5	Indispensable	0,19		Core
+YNL262W	POL2	Indispensable	0,31		Core
+YNL272C	SEC2	Indispensable	0,55		Core
+YNL280C	ERG24		0,49		Core
+YNL282W	POP3	Indispensable	0,24		Core
+YNL287W	SEC21		0,34		Core
+YNL290W	RFC3		0,29		Core
+YNL308C	KRI1	Indispensable	0,40		Core
+YNL310C	ZIM17	Indispensable	0,67		Core
+YNL312W	RFA2		0,32		Core
+YNL313C	EMW1	Indispensable	0,32		Core
+YNL317W	PFS2	Indispensable	0,12		Core
+YNR003C	RPC34		0,16		Core
+YNR011C	PRP2	Indispensable	0,29		Core
+YNR016C	ACC1		0,46		Core
+YNR017W	TIM23		0,33		Core
+YNR026C	SEC12	Indispensable	0,46		Core
+YNR035C	ARC35	Indispensable	0,27		Core
+YNR038W	DBP6	Indispensable	0,28		Core
+YNR043W	MVD1		0,37		Core
+YNR053C	NOG2	Indispensable	0,29		Core
+YNR054C	ESF2	Indispensable	0,24		Core
+YOL005C	RPB11	Indispensable	0,33		Core
+YOL021C	DIS3	Indispensable	0,16		Core
+YOL038W	PRE6	Indispensable	0,36		Core
+YOL040C	RPS15	Indispensable	0,33		Core
+YOL066C	RIB2	Indispensable	0,64		Core
+YOL069W	NUF2	Indispensable	0,39		Core
+YOL077C	BRX1	Indispensable	0,13		Core
+YOL094C	RFC4	Indispensable	0,32		Core
+YOL097C	WRS1	Indispensable	0,25		Core
+YOL102C	TPT1	Indispensable	0,34		Core
+YOL123W	HRP1	Indispensable	0,51		Core
+YOL127W	RPL25	Indispensable	0,61		Core
+YOL133W	HRT1		0,36		Core
+YOL135C	MED7	Indispensable	0,46		Core
+YOL139C	CDC33	Indispensable	0,31		Core
+YOL144W	NOP8		0,37		Core
+YOL146W	PSF3	Indispensable	0,32		Core
+YOR004W	UTP23	Indispensable	0,27		Core
+YOR046C	DBP5	Indispensable	0,32		Core
+YOR048C	RAT1	Indispensable	0,18		Core
+YOR056C	NOB1	Indispensable	0,26		Core
+YOR057W	SGT1	Indispensable	0,59		Core
+YOR063W	RPL3	Indispensable	0,25		Core
+YOR075W	UFE1	Indispensable	0,56		Core
+YOR095C	RKI1	Indispensable	0,28		Core
+YOR103C	OST2	Indispensable	0,36		Core
+YOR116C	RPO31	Indispensable	0,22		Core
+YOR117W	RPT5	Indispensable	0,19		Core
+YOR119C	RIO1	Indispensable	0,39		Core
+YOR143C	THI80		0,37		Core
+YOR145C	PNO1	Indispensable	0,20		Core
+YOR148C	SPP2	Indispensable	0,36		Core
+YOR149C	SMP3		0,41		Core
+YOR151C	RPB2	Indispensable	0,22		Core
+YOR157C	PUP1		0,28		Core
+YOR159C	SME1	Indispensable	0,30		Core
+YOR168W	GLN4	Indispensable	0,17		Core
+YOR174W	MED4		0,39		Core
+YOR176W	HEM15		0,31		Core
+YOR194C	TOA1		0,42		Core
+YOR206W	NOC2	Indispensable	0,15		Core
+YOR207C	RET1	Indispensable	0,33		Core
+YOR210W	RPB10		0,29		Core
+YOR217W	RFC1	Indispensable	0,31		Core
+YOR224C	RPB8		0,27		Core
+YOR232W	MGE1	Indispensable	0,40		Core
+YOR249C	APC5		0,30		Core
+YOR250C	CLP1	Indispensable	0,24		Core
+YOR254C	SEC63	Indispensable	0,55		Core
+YOR257W	CDC31		0,36		Core
+YOR259C	RPT4	Indispensable	0,30		Core
+YOR260W	GCD1	Indispensable	0,36		Core
+YOR261C	RPN8	Indispensable	0,22		Core
+YOR262W	YOR262W	Indispensable	0,40		Core
+YOR272W	YTM1		0,14		Core
+YOR287C	RRP36		0,26		Core
+YOR294W	RRS1	Indispensable	0,17		Core
+YOR310C	NOP58	Indispensable	0,13		Core
+YOR319W	HSH49	Indispensable	0,27		Core
+YOR326W	MYO2		0,49		Core
+YOR329C	SCD5	Indispensable	0,76		Core
+YOR335C	ALA1		0,36		Core
+YOR340C	RPA43	Indispensable	0,25		Core
+YOR341W	RPA190	Indispensable	0,22		Core
+YOR361C	PRT1		0,20		Core
+YOR362C	PRE10	Indispensable	0,21		Core
+YOR370C	MRS6		0,43		Core
+YPL010W	RET3		0,45		Core
+YPL011C	TAF3	Indispensable	0,45		Core
+YPL012W	RRP12		0,19		Core
+YPL028W	ERG10	Indispensable	0,49		Core
+YPL043W	NOP4	Indispensable	0,25		Core
+YPL063W	TIM50	Indispensable	0,38		Core
+YPL083C	SEN54	Indispensable	0,27		Core
+YPL085W	SEC16	Indispensable	0,64		Core
+YPL093W	NOG1	Indispensable	0,12		Core
+YPL094C	SEC62		0,36		Core
+YPL117C	IDI1	Indispensable	0,39		Core
+YPL122C	TFB2	Indispensable	0,44		Core
+YPL124W	SPC29		0,45		Core
+YPL126W	NAN1	Indispensable	0,15		Core
+YPL131W	RPL5	Indispensable	0,18		Core
+YPL146C	NOP53		0,34		Core
+YPL151C	PRP46	Indispensable	0,15		Core
+YPL160W	CDC60	Indispensable	0,21		Core
+YPL175W	SPT14	Indispensable	0,51		Core
+YPL190C	NAB3		0,49		Core
+YPL209C	IPL1	Indispensable	0,54		Core
+YPL211W	NIP7	Indispensable	0,21		Core
+YPL217C	BMS1	Indispensable	0,18		Core
+YPL218W	SAR1		0,44		Core
+YPL228W	CET1	Indispensable	0,47		Core
+YPL233W	NSL1	Indispensable	0,38		Core
+YPL235W	RVB2		0,24		Core
+YPL237W	SUI3		0,24		Core
+YPL252C	YAH1		0,50		Core
+YPL266W	DIM1	Indispensable	0,18		Core
+YPR010C	RPA135	Indispensable	0,15		Core
+YPR016C	TIF6	Indispensable	0,49		Core
+YPR019W	MCM4	Indispensable	0,22		Core
+YPR025C	CCL1		0,32		Core
+YPR033C	HTS1	Indispensable	0,23		Core
+YPR035W	GLN1	Indispensable	0,43		Core
+YPR041W	TIF5	Indispensable	0,28		Core
+YPR048W	TAH18	Indispensable	0,52		Core
+YPR055W	SEC8	Indispensable	0,43		Core
+YPR056W	TFB4	Indispensable	0,24		Core
+YPR082C	DIB1	Indispensable	0,34		Core
+YPR085C	ASA1	Indispensable	0,46		Core
+YPR086W	SUA7	Indispensable	0,44		Core
+YPR094W	RDS3	Indispensable	0,29		Core
+YPR107C	YTH1	Indispensable	0,24		Core
+YPR108W	RPN7	Indispensable	0,39		Core
+YPR110C	RPC40	Indispensable	0,13		Core
+YPR112C	MRD1	Indispensable	0,22		Core
+YPR113W	PIS1		0,49		Core
+YPR133C	SPN1	Indispensable	0,59		Core
+YPR137W	RRP9	Indispensable	0,20		Core
+YPR143W	RRP15	Indispensable	0,31		Core
+YPR162C	ORC4		0,36		Core
+YPR165W	RHO1	Indispensable	0,41		Core
+YPR175W	DPB2	Indispensable	0,25		Core
+YPR176C	BET2	Indispensable	0,41		Core
+YPR178W	PRP4	Indispensable	0,21		Core
+YPR180W	AOS1	Indispensable	0,52		Core
+YPR181C	SEC23		0,27		Core
+YPR182W	SMX3	Indispensable	0,32		Core
+YPR183W	DPM1	Indispensable	0,32		Core
+YPR186C	PZF1	Indispensable	0,66		Core
+YPR187W	RPO26		0,24		Core
+YPR190C	RPC82		0,22		Core
+YAR019C	CDC15	Dispensable	0,59	Dispensable	Dispensable
+YBL014C	RRN6		0,61	Dispensable	Dispensable
+YBL030C	PET9		0,61		Dispensable
+YBL034C	STU1	Dispensable	0,53		Dispensable
+YBL040C	ERD2	Dispensable	0,55	Dispensable	Dispensable
+YBL105C	PKC1	Dispensable	0,53	Dispensable	Dispensable
+YBR002C	RER2	Dispensable	0,39	Dispensable	Dispensable
+YBR038W	CHS2	Dispensable	0,71		Dispensable
+YBR070C	ALG14		0,53		Dispensable
+YBR136W	MEC1		0,62	Dispensable	Dispensable
+YBR192W	RIM2	Dispensable	0,56	Dispensable	Dispensable
+YBR252W	DUT1	Dispensable	0,41		Dispensable
+YCL004W	PGS1		0,55	Dispensable	Dispensable
+YDL003W	MCD1	Dispensable	0,36		Dispensable
+YDL004W	ATP16	Dispensable	0,48		Dispensable
+YDL058W	USO1		0,54		Dispensable
+YDL084W	SUB2	Dispensable	0,24	Dispensable	Dispensable
+YDL092W	SRP14	Dispensable	0,65	Dispensable	Dispensable
+YDL105W	NSE4	Dispensable	0,41		Dispensable
+YDL120W	YFH1	Dispensable	0,55	Dispensable	Dispensable
+YDL165W	CDC36	Dispensable	0,36		Dispensable
+YDL205C	HEM3		0,53		Dispensable
+YDL212W	SHR3	Dispensable	0,58		Dispensable
+YDL217C	TIM22		0,51		Dispensable
+YDL220C	CDC13		0,59		Dispensable
+YDL235C	YPD1	Dispensable	0,73	Dispensable	Dispensable
+YDR047W	HEM12		0,52		Dispensable
+YDR050C	TPI1		0,56	Dispensable	Dispensable
+YDR081C	PDC2	Dispensable	0,66	Dispensable	Dispensable
+YDR082W	STN1	Dispensable	0,49		Dispensable
+YDR141C	DOP1	Dispensable	0,51		Dispensable
+YDR160W	SSY1		0,77	Dispensable	Dispensable
+YDR170C	SEC7		0,64		Dispensable
+YDR177W	UBC1		0,57	Dispensable	Dispensable
+YDR189W	SLY1		0,51		Dispensable
+YDR208W	MSS4		0,60		Dispensable
+YDR243C	PRP28	Dispensable	0,18	Dispensable	Dispensable
+YDR292C	SRP101		0,57	Dispensable	Dispensable
+YDR353W	TRR1	Dispensable	0,53	Dispensable	Dispensable
+YDR373W	FRQ1	Dispensable	0,59		Dispensable
+YDR381W	YRA1	Dispensable	0,47	Dispensable	Dispensable
+YDR397C	NCB2	Dispensable	0,51	Dispensable	Dispensable
+YDR427W	RPN9	Dispensable	0,08		Dispensable
+YDR468C	TLG1	Dispensable	0,60		Dispensable
+YDR487C	RIB3	Dispensable	0,48		Dispensable
+YDR499W	LCD1		0,54	Dispensable	Dispensable
+YDR510W	SMT3		0,52		Dispensable
+YEL034W	HYP2	Dispensable	0,59		Dispensable
+YEL035C	YEL035C	Dispensable	0,68		Dispensable
+YER008C	SEC3		0,51	Dispensable	Dispensable
+YER009W	NTF2	Dispensable	0,50	Dispensable	Dispensable
+YER036C	ARB1	Dispensable	0,44		Dispensable
+YER074W-A	YOS1		0,57		Dispensable
+YER093C	TSC11	Dispensable	0,64		Dispensable
+YER112W	LSM4	Dispensable	0,29		Dispensable
+YER147C	SCC4	Dispensable	0,55		Dispensable
+YER159C	BUR6	Dispensable	0,51	Dispensable	Dispensable
+YER165W	PAB1	Dispensable	0,32	Dispensable	Dispensable
+YFL024C	EPL1	Dispensable	0,34		Dispensable
+YFL034C-B	MOB2		0,54	Dispensable	Dispensable
+YFR028C	CDC14	Dispensable	0,40		Dispensable
+YGL018C	JAC1	Dispensable	0,45		Dispensable
+YGL092W	NUP145		0,57	Dispensable	Dispensable
+YGL093W	SPC105	Dispensable	0,37		Dispensable
+YGL098W	USE1		0,56		Dispensable
+YGL111W	NSA1	Dispensable	0,31	Dispensable	Dispensable
+YGL150C	INO80	Dispensable	0,46	Dispensable	Dispensable
+YGL169W	SUA5	Dispensable	0,43	Dispensable	Dispensable
+YGL172W	NUP49	Dispensable	0,52	Dispensable	Dispensable
+YGL225W	VRG4	Dispensable	0,49		Dispensable
+YGR065C	VHT1	Dispensable	0,58		Dispensable
+YGR098C	ESP1		0,53		Dispensable
+YGR119C	NUP57	Dispensable	0,54	Dispensable	Dispensable
+YGR147C	NAT2	Dispensable	0,68		Dispensable
+YGR172C	YIP1	Dispensable	0,55		Dispensable
+YGR198W	YPP1	Dispensable	0,60	Dispensable	Dispensable
+YGR216C	GPI1	Dispensable	0,29		Dispensable
+YGR280C	PXR1	Dispensable	0,23		Dispensable
+YHR042W	NCP1	Dispensable	0,49	Dispensable	Dispensable
+YHR058C	MED6	Dispensable	0,57		Dispensable
+YHR070W	TRM5	Dispensable	0,48	Dispensable	Dispensable
+YHR164C	DNA2		0,54	Dispensable	Dispensable
+YHR199C-A	NBL1		0,52		Dispensable
+YIL031W	ULP2	Dispensable	0,72	Dispensable	Dispensable
+YIL048W	NEO1		0,59	Dispensable	Dispensable
+YIL051C	MMF1	Dispensable	0,57	Dispensable	Dispensable
+YIL063C	YRB2	Dispensable	0,62	Dispensable	Dispensable
+YIL115C	NUP159	Dispensable	0,56		Dispensable
+YIL118W	RHO3		0,62	Dispensable	Dispensable
+YIL129C	TAO3	Dispensable	0,65	Dispensable	Dispensable
+YIL147C	SLN1	Dispensable	0,66	Dispensable	Dispensable
+YIL150C	MCM10		0,56		Dispensable
+YJL005W	CYR1		0,55		Dispensable
+YJL019W	MPS3		0,53	Dispensable	Dispensable
+YJL025W	RRN7		0,56		Dispensable
+YJL076W	NET1	Dispensable	0,56	Dispensable	Dispensable
+YJL085W	EXO70		0,56		Dispensable
+YJL097W	PHS1		0,52		Dispensable
+YJL156C	SSY5	Dispensable	0,66	Dispensable	Dispensable
+YJL174W	KRE9	Dispensable	0,54	Dispensable	Dispensable
+YJR016C	ILV3		0,55		Dispensable
+YJR017C	ESS1	Dispensable	0,60	Dispensable	Dispensable
+YJR022W	LSM8	Dispensable	0,16		Dispensable
+YJR076C	CDC11	Dispensable	0,33	Dispensable	Dispensable
+YJR136C	TTI2		0,53		Dispensable
+YJR141W	IPA1		0,56		Dispensable
+YKL006C-A	SFT1		0,64	Dispensable	Dispensable
+YKL018W	SWD2	Dispensable	0,36	Dispensable	Dispensable
+YKL049C	CSE4		0,52		Dispensable
+YKL089W	MIF2		0,51		Dispensable
+YKL122C	SRP21	Dispensable	0,60	Dispensable	Dispensable
+YKL154W	SRP102	Dispensable	0,60	Dispensable	Dispensable
+YKL180W	RPL17A		0,56	Dispensable	Dispensable
+YKL189W	HYM1		0,57	Dispensable	Dispensable
+YKL192C	ACP1		0,53		Dispensable
+YKL203C	TOR2	Dispensable	0,45	Dispensable	Dispensable
+YKR004C	ECM9	Dispensable	0,58		Dispensable
+YKR038C	KAE1	Dispensable	0,42	Dispensable	Dispensable
+YLR010C	TEN1	Dispensable	0,51		Dispensable
+YLR022C	SDO1		0,58	Dispensable	Dispensable
+YLR099W-A	MIM2		0,74		Dispensable
+YLR141W	RRN5	Dispensable	0,63		Dispensable
+YLR153C	ACS2	Dispensable	0,28		Dispensable
+YLR310C	CDC25	Dispensable	0,66	Dispensable	Dispensable
+YLR359W	ADE13	Dispensable	0,42	Dispensable	Dispensable
+YML043C	RRN11	Dispensable	0,48		Dispensable
+YML064C	TEM1	Dispensable	0,52	Dispensable	Dispensable
+YML104C	MDM1		0,63		Dispensable
+YML105C	SEC65	Dispensable	0,66	Dispensable	Dispensable
+YMR028W	TAP42		0,51		Dispensable
+YMR033W	ARP9	Dispensable	0,48	Dispensable	Dispensable
+YMR047C	NUP116	Dispensable	0,61	Dispensable	Dispensable
+YMR079W	SEC14	Dispensable	0,45	Dispensable	Dispensable
+YMR094W	CTF13		0,54		Dispensable
+YMR134W	YMR134W	Dispensable	0,64	Dispensable	Dispensable
+YMR185W	RTP1		0,52	Dispensable	Dispensable
+YMR197C	VTI1		0,58		Dispensable
+YMR211W	DML1	Dispensable	0,47		Dispensable
+YMR218C	TRS130		0,50		Dispensable
+YMR270C	RRN9	Dispensable	0,50	Dispensable	Dispensable
+YMR298W	LIP1		0,55	Dispensable	Dispensable
+YMR308C	PSE1	Dispensable	0,38	Dispensable	Dispensable
+YNL006W	LST8	Dispensable	0,46	Dispensable	Dispensable
+YNL024C-A	KSH1		0,58		Dispensable
+YNL103W	MET4	Dispensable	0,55	Dispensable	Dispensable
+YNL118C	DCP2	Dispensable	0,32	Dispensable	Dispensable
+YNL137C	NAM9	Dispensable	0,36		Dispensable
+YNL152W	INN1	Dispensable	0,62	Dispensable	Dispensable
+YNL163C	RIA1	Dispensable	0,55	Dispensable	Dispensable
+YNL181W	YNL181W	Dispensable	0,46	Dispensable	Dispensable
+YNL258C	DSL1		0,56		Dispensable
+YNL263C	YIF1		0,54		Dispensable
+YNL267W	PIK1		0,52		Dispensable
+YNL306W	MRPS18	Dispensable	0,28		Dispensable
+YNR046W	TRM112	Dispensable	0,48	Dispensable	Dispensable
+YOL010W	RCL1	Dispensable	0,10		Dispensable
+YOL022C	TSR4	Dispensable	0,36	Dispensable	Dispensable
+YOL026C	MIM1	Dispensable	0,64	Dispensable	Dispensable
+YOL034W	SMC5	Dispensable	0,28		Dispensable
+YOL078W	AVO1	Dispensable	0,72		Dispensable
+YOL120C	RPL18A	Dispensable	0,49		Dispensable
+YOL130W	ALR1	Dispensable	0,52	Dispensable	Dispensable
+YOL149W	DCP1	Dispensable	0,28		Dispensable
+YOR020C	HSP10		0,51		Dispensable
+YOR074C	CDC21		0,59		Dispensable
+YOR077W	RTS2	Dispensable	0,52		Dispensable
+YOR122C	PFY1	Dispensable	0,49	Dispensable	Dispensable
+YOR160W	NET1	Dispensable	0,46	Dispensable	Dispensable
+YOR167C	RPS28A	Dispensable	0,61	Dispensable	Dispensable
+YOR181W	LAS17	Dispensable	0,56		Dispensable
+YOR182C	RPS30B	Dispensable	0,55		Dispensable
+YOR204W	DED1		0,56		Dispensable
+YOR236W	DFR1		0,63		Dispensable
+YOR244W	ESA1	Dispensable	0,29		Dispensable
+YOR256C	TRE2		0,60		Dispensable
+YOR281C	PLP2	Dispensable	0,59		Dispensable
+YOR336W	KRE5		0,55	Dispensable	Dispensable
+YOR353C	SOG2	Dispensable	0,67	Dispensable	Dispensable
+YOR372C	NDD1	Dispensable	0,60	Dispensable	Dispensable
+YOR373W	NUD1		0,63		Dispensable
+YPL007C	TFC8		0,51		Dispensable
+YPL016W	SWI1	Dispensable	0,51	Dispensable	Dispensable
+YPL020C	ULP1		0,73		Dispensable
+YPL075W	GCR1	Dispensable	0,61		Dispensable
+YPL076W	GPI2	Dispensable	0,41		Dispensable
+YPL128C	TBF1		0,52		Dispensable
+YPL143W	RPL33A	Dispensable	0,45		Dispensable
+YPL169C	MEX67		0,52		Dispensable
+YPL210C	SRP72	Dispensable	0,50	Dispensable	Dispensable
+YPL242C	IQG1	Dispensable	0,63		Dispensable
+YPL243W	SRP68	Dispensable	0,39		Dispensable
+YPL255W	BBP1		0,51		Dispensable
+YPL268W	PLC1	Dispensable	0,62		Dispensable
+YPR034W	ARP7	Dispensable	0,54		Dispensable
+YPR088C	SRP54	Dispensable	0,34	Dispensable	Dispensable
+YPR104C	FHL1	Dispensable	0,45		Dispensable
+YPR144C	NOC4	Dispensable	0,16		Dispensable
+YPR161C	SGV1	Dispensable	0,45	Dispensable	Dispensable
+YPR168W	NUT2	Dispensable	0,53		Dispensable
+YPR169W	JIP5	Dispensable	0,28		Dispensable
+YBR140C	IRA1	Indispensable	0,62	Dispensable	Not further classified
+YBR152W	SPP381	Indispensable	0,33	Dispensable	Not further classified
+YDL017W	CDC7	Indispensable	0,37	Dispensable	Not further classified
+YDR052C	DBF4	Indispensable	0,61	Dispensable	Not further classified
+YDR087C	RRP1	Indispensable	0,37	Dispensable	Not further classified
+YDR166C	SEC5	Indispensable	0,34	Dispensable	Not further classified
+YDR240C	SNU56	Indispensable	0,25	Dispensable	Not further classified
+YEL019C	MMS21	Indispensable	0,40	Dispensable	Not further classified
+YER043C	SAH1		0,44	Dispensable	Not further classified
+YER104W	RTT105	Indispensable	0,65	Dispensable	Not further classified
+YER146W	LSM5		0,28	Dispensable	Not further classified
+YER157W	COG3		0,30	Dispensable	Not further classified
+YFL029C	CAK1		0,46	Dispensable	Not further classified
+YFL038C	YPT1		0,39	Dispensable	Not further classified
+YFR027W	ECO1	Indispensable	0,55	Dispensable	Not further classified
+YFR029W	PTR3	Indispensable	0,65	Dispensable	Not further classified
+YGL075C	MPS2	Indispensable	0,58	Dispensable	Not further classified
+YGL128C	CWC23		0,34	Dispensable	Not further classified
+YGR046W	TAM41		0,44	Dispensable	Not further classified
+YGR120C	COG2	Indispensable	0,43	Dispensable	Not further classified
+YHR007C	ERG11		0,40	Dispensable	Not further classified
+YHR023W	MYO1	Indispensable	0,66	Dispensable	Not further classified
+YHR101C	BIG1	Indispensable	0,60	Dispensable	Not further classified
+YIL046W	MET30		0,48	Dispensable	Not further classified
+YIL106W	MOB1		0,36	Dispensable	Not further classified
+YIR006C	PAN1	Indispensable	0,58	Dispensable	Not further classified
+YJL010C	NOP9	Indispensable	0,16	Dispensable	Not further classified
+YJR042W	NUP85		0,44	Dispensable	Not further classified
+YJR089W	BIR1		0,49	Dispensable	Not further classified
+YKL141W	SDH3		0,48	Dispensable	Not further classified
+YLR007W	NSE1	Indispensable	0,39	Dispensable	Not further classified
+YLR186W	EMG1	Indispensable	0,20	Dispensable	Not further classified
+YLR208W	SEC13	Indispensable	0,29	Dispensable	Not further classified
+YLR215C	CDC123	Indispensable	0,46	Dispensable	Not further classified
+YLR223C	IFH1	Indispensable	0,56	Dispensable	Not further classified
+YLR305C	STT4	Indispensable	0,60	Dispensable	Not further classified
+YML091C	RPM2		0,48	Dispensable	Not further classified
+YMR200W	ROT1	Indispensable	0,62	Dispensable	Not further classified
+YMR239C	RNT1		0,16	Dispensable	Not further classified
+YMR296C	LCB1	Indispensable	0,31	Dispensable	Not further classified
+YNL007C	SIS1		0,49	Dispensable	Not further classified
+YNL161W	CBK1		0,49	Dispensable	Not further classified
+YNL188W	KAR1	Indispensable	0,46	Dispensable	Not further classified
+YOR060C	SLD7	Indispensable	0,67	Dispensable	Not further classified
+YOR098C	NUP1	Indispensable	0,64	Dispensable	Not further classified
+YOR278W	HEM4	Indispensable	0,50	Dispensable	Not further classified
+YPL082C	MOT1		0,48	Dispensable	Not further classified
+YPL153C	RAD53		0,45	Dispensable	Not further classified
+YPL204W	HRR25	Indispensable	0,50	Dispensable	Not further classified
+YPL231W	FAS2	Indispensable	0,42	Dispensable	Not further classified
+YPR103W	PRE2		0,21	Dispensable	Not further classified
+YPR105C	COG4		0,40	Dispensable	Not further classified
